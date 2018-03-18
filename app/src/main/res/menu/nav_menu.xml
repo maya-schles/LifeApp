@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_avatar"
+            android:title="@string/avatar_tab" />
+        <item android:title="@string/quests_title">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item
+                        android:id="@+id/missions"
+                        android:title="@string/daily_missions_tab"/>
+                    <item
+                        android:title="@string/main_quests_tab"
+                        android:id="@+id/main_quests"/>
+                    <item
+                        android:title="@string/side_quests_tab"
+                        android:id="@+id/side_quests"/>
+                </group>
+            </menu>
+        </item>
+    </group>
+</menu>

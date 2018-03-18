@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">life</string>
+
+    <!-- nav menu strings -->
+    <string name="avatar_tab">Avatar</string>
+    <string name="quests_title">Quests</string>
+    <string name="daily_missions_tab">Today\'s Missions</string>
+    <string name="main_quests_tab">Main Quests</string>
+    <string name="side_quests_tab">Side Quests</string>
+
+    <!-- text labels -->
+    <string name="missions_label">missions</string>
+
+    <!-- text hints -->
+    <string name="quest_title_hint">Title</string>
+    <string name="quest_description_hint">Description</string>
+    <string name="mission_title_hint">Title</string>
+    <string name="mission_description_hint">Description</string>
+
+    <!-- button texts -->
+    <string name="add_mission">Add Mission</string>
+    <string name="create_quest">Create Quest</string>
+
+    <!-- abbreviated days of week -->
+    <string name="abbreviated_sunday">SUN</string>
+    <string name="abbreviated_monday">MON</string>
+    <string name="abbreviated_tuesday">TUE</string>
+    <string name="abbreviated_wednesday">WED</string>
+    <string name="abbreviated_thursday">THU</string>
+    <string name="abbreviated_friday">FRI</string>
+    <string name="abbreviated_saturday">SAT</string>
+
+    <!-- mission repeat hints and constants -->
+    <string name="start_date_hint">mission start date</string>
+    <string name="end_date_hint">mission end date</string>
+    <string name="rep_times_hint">how many times to repeat</string>
+    <string name="default_rep_times">66</string>
+
+    <!-- menu strings-->
+    <string name="create_quest_from_string">import quest from string</string>
+
+    <!-- import dialog strings -->
+    <string name="import_button">import</string>
+    <string name="import_string_hint">Enter quest import string</string>
+</resources>

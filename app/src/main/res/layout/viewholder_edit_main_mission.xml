@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <include
+        layout="@layout/background_delete"/>
+    <RelativeLayout
+        android:id="@+id/foreground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:visibility="visible">
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/difficulty_spinner"
+            android:hint="@string/mission_title_hint"/>
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/title"
+            android:layout_below="@+id/title"
+            android:hint= "@string/mission_description_hint"/>
+
+        <Spinner
+            android:id="@+id/difficulty_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/title"
+            android:layout_alignParentEnd="true" />
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/number"
+            android:columnCount="4"
+            android:orientation="horizontal"
+            android:rowCount="2"
+            android:visibility="visible">
+
+            <CheckBox
+                android:id="@+id/sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abbreviated_sunday" />
+
+            <CheckBox
+                android:id="@+id/monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abbreviated_monday" />
+
+            <CheckBox
+                android:id="@+id/tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abbreviated_tuesday" />
+
+            <CheckBox
+                android:id="@+id/wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abbreviated_wednesday" />
+
+            <CheckBox
+                android:id="@+id/thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abbreviated_thursday" />
+
+            <CheckBox
+                android:id="@+id/friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abbreviated_friday" />
+
+            <CheckBox
+                android:id="@+id/saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/abbreviated_saturday" />
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/description"
+            android:hint="@string/start_date_hint"/>
+
+        <Spinner
+            android:id="@+id/end_case_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/start_date"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/start_date"
+            android:hint="@string/end_date_hint"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/start_date"
+            android:hint="@string/rep_times_hint"
+            android:inputType="number"
+            android:text="@string/default_rep_times"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+</FrameLayout>

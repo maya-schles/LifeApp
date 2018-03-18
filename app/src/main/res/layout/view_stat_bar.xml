@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
+        <ImageView
+            android:id="@+id/stat_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/bar_default_height"
+            android:layout_weight="0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_health"/>
+        <com.r3dtech.life.ui.custom_views.BarView
+            android:id="@+id/bar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/bar_default_height"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ratio"
+        android:textAppearance="@style/Text_Stat_Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+    <TextView
+        android:id="@+id/name"
+        android:textAppearance="@style/Text_Stat_Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+</RelativeLayout>

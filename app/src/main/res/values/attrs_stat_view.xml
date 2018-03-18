@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="StatBarView">
+        <attr name="statName" format="string" />
+        <attr name="progressColor" format="color" />
+        <attr name="statIcon" format="reference" />
+    </declare-styleable>
+</resources>
