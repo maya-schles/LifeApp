@@ -2,19 +2,22 @@ package com.r3dtech.life.logic.quests.implemetation;
 
 import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
+import com.r3dtech.life.logic.quests.missions.MissionUpdateListener;
 import com.r3dtech.life.logic.quests.quests.MainQuest;
 import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.logic.quests.QuestDB;
+import com.r3dtech.life.logic.quests.quests.QuestUpdateListener;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GameQuestDB implements QuestDB {
     private List<MainQuest> mainQuests = new ArrayList<>();
     private List<SideQuest> sideQuests = new ArrayList<>();
+    private transient QuestUpdateListener updateListener = (Quest q)->{};
+    private transient MissionUpdateListener missionUpdateListener = (Mission m)->{};
 
     @Override
     public List<MainMission> getMissionsForDate(LocalDate date) {
@@ -34,11 +37,15 @@ public class GameQuestDB implements QuestDB {
     @Override
     public void addMainQuest(MainQuest quest) {
         mainQuests.add(quest);
+        quest.setUpdateListener(this::onQuestDone);
+        quest.setMissionUpdateListener(this::onMissionDone);
     }
 
     @Override
     public void addSideQuest(SideQuest quest) {
         sideQuests.add(quest);
+        quest.setUpdateListener(this::onQuestDone);
+        quest.setMissionUpdateListener(this::onMissionDone);
     }
 
     @Override
@@ -78,5 +85,22 @@ public class GameQuestDB implements QuestDB {
     @Override
     public void dismissMission(MainMission mission, LocalDate date) {
         mission.dismissForDay(date);
+    }
+
+    @Override
+    public void setQuestUpdateListener(QuestUpdateListener listener) {
+        updateListener = listener;
+    }
+
+    @Override
+    public void setMissionUpdateListener(MissionUpdateListener listener) {
+    }
+
+    private void onQuestDone(Quest quest) {
+        updateListener.onComplete(quest);
+    }
+
+    private void onMissionDone(Mission mission) {
+        missionUpdateListener.onComplete(mission);
     }
 }

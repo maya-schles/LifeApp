@@ -52,12 +52,16 @@ public class BarView extends View {
         progressPaint.setColor(color);
     }
 
+    private float getRatio() {
+        return ratio;
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         barRect.set(0, 0, getWidth(), getHeight());
         canvas.drawRoundRect(barRect, RX, RY, barPaint);
 
-        barRect.set(0, 0, getWidth()*ratio, getHeight());
+        barRect.set(0, 0, getWidth()*getRatio(), getHeight());
         canvas.drawRoundRect(barRect, RX, RY, progressPaint);
     }
 }

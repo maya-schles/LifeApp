@@ -21,6 +21,7 @@ public class GameSideMission extends GameMission implements SideMission {
     @Override
     public void setDone(LocalDate date) {
         isComplete = true;
+        updateListener.onComplete(this);
     }
 
     @Override

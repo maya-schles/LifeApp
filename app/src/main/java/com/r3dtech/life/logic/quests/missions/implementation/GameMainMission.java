@@ -55,6 +55,9 @@ public class GameMainMission extends GameMission implements MainMission {
             repeat.addOccurance();
             datesDone.put(date, true);
         }
+        if (isComplete(date)) {
+            updateListener.onComplete(this);
+        }
     }
 
     @Override

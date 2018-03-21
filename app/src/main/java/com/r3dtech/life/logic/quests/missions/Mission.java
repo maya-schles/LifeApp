@@ -8,4 +8,5 @@ public interface Mission extends Task {
     boolean isComplete(LocalDate date);
     boolean isDoneForDay(LocalDate date);
     void setDone(LocalDate date);
+    void setUpdateListener(MissionUpdateListener listener);
 }

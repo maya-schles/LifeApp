@@ -14,14 +14,11 @@ import android.view.View;
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.r3dtech.life.logic.Game;
-import com.r3dtech.life.logic.avatar.Avatar;
-import com.r3dtech.life.logic.avatar.implementation.GameAvatar;
-import com.r3dtech.life.logic.quests.QuestDB;
-import com.r3dtech.life.logic.quests.implemetation.GameQuestDB;
+import com.r3dtech.life.logic.implementation.GameImplementation;
 import com.r3dtech.life.logic.quests.quests.MainQuest;
 import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
-import com.r3dtech.life.shared_prefs_help.SharedPrefsHelper;
+import com.r3dtech.life.data_loading.SharedPrefsHelper;
 import com.r3dtech.life.ui.custom_views.CharacterView;
 import com.r3dtech.life.ui.fragments.MissionsViewFragment;
 import com.r3dtech.life.ui.fragments.QuestListViewFragment;
@@ -31,9 +28,7 @@ import com.r3dtech.life.ui.fragments.RecyclerViewFragment;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class MainActivity extends AppCompatActivity implements Game, NavigationView.OnNavigationItemSelectedListener{
-    private static final String AVATAR_TAG = "avatar";
-    private static final String QUEST_DB_TAG = "quest_db";
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final String SHARED_PREF_TAG = "life";
 
     public static final String SIDE_QUEST_TAG = "side_quest";
@@ -42,34 +37,27 @@ public class MainActivity extends AppCompatActivity implements Game, NavigationV
     private static final int SIDE_QUEST_CREATE = 1;
     public static final int MAIN_QUEST_CREATE = 2;
 
-    private Avatar avatar;
-    private QuestDB questDB;
-    private SharedPrefsHelper prefsHelper;
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        prefsHelper = new SharedPrefsHelper(SHARED_PREF_TAG, this);
-        try {
-            clearGameData();
-        } catch (IOException e) {
-            throw new RuntimeException("Error clearing game data");
-        }//*/
-        loadGameData();
+        game = new GameImplementation(new SharedPrefsHelper(SHARED_PREF_TAG, this));
+        game.start();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ((CharacterView) findViewById(R.id.character_view)).setAvatar(avatar);
+        ((CharacterView) findViewById(R.id.character_view)).setAvatar(game.getAvatar());
         ((FloatingActionMenu) findViewById(R.id.create_quest_menu)).setClosedOnTouchOutside(true);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        saveGameData();
+        game.stop();
     }
 
     @Override
@@ -78,75 +66,18 @@ public class MainActivity extends AppCompatActivity implements Game, NavigationV
 
         if (requestCode == SIDE_QUEST_CREATE && resultCode == RESULT_OK) {
             SideQuest quest = (SideQuest) data.getSerializableExtra(SIDE_QUEST_TAG);
-            questDB.addSideQuest(quest);
+            game.getQuestDB().addSideQuest(quest);
         }
 
         if (requestCode == MAIN_QUEST_CREATE && resultCode == RESULT_OK) {
             MainQuest quest = (MainQuest) data.getSerializableExtra(MAIN_QUEST_TAG);
-            questDB.addMainQuest(quest);
+            game.getQuestDB().addMainQuest(quest);
         }
     }
 
-    private void loadAvatar() throws IOException, ClassNotFoundException{
-        avatar = (Avatar) prefsHelper.read(AVATAR_TAG);
-        if (avatar == null) {
-            avatar = new GameAvatar(44, 168, "R3dtech");
-        }
-    }
-
-    private void saveAvatar() throws IOException {
-        prefsHelper.write(avatar, AVATAR_TAG);
-    }
-
-    private void loadQuestDB() throws IOException, ClassNotFoundException{
-        questDB = (QuestDB) prefsHelper.read(QUEST_DB_TAG);
-        if (questDB == null) {
-            questDB = new GameQuestDB();
-        }
-    }
-
-    private void saveQuestDB() throws IOException {
-        prefsHelper.write(questDB, QUEST_DB_TAG);
-    }
-
-    private void loadGameData() {
-        try {
-            loadAvatar();
-        } catch (Exception e) {
-            throw new RuntimeException("Couldn't load avatar");
-        }
-        try {
-            loadQuestDB();
-        } catch (Exception e) {
-            throw new RuntimeException("Couldn't load quest DB");
-        }
-    }
-
-    private void saveGameData() {
-        try {
-            saveAvatar();
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't save avatar");
-        }
-        try {
-            saveQuestDB();
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't save quest DB");
-        }
-    }
 
     private void clearGameData() throws IOException {
-        prefsHelper.write(null, AVATAR_TAG);
-        prefsHelper.write(null, QUEST_DB_TAG);
-    }
-    @Override
-    public Avatar getAvatar() {
-        return avatar;
-    }
-
-    @Override
-    public QuestDB getQuestDB() {
-        return questDB;
+        game.clearData();
     }
 
     @Override
@@ -166,13 +97,13 @@ public class MainActivity extends AppCompatActivity implements Game, NavigationV
         RecyclerViewFragment fragment = null;
         switch (id) {
             case R.id.side_quests:
-                fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, questDB.getSideQuests());
+                fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, game.getQuestDB().getSideQuests());
                 break;
             case R.id.main_quests:
-                fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, questDB.getMainQuests());
+                fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, game.getQuestDB().getMainQuests());
                 break;
             case R.id.missions:
-                fragment = RecyclerViewFragment.newInstance(MissionsViewFragment.class, questDB.getMissionsForDate(LocalDate.now()));
+                fragment = RecyclerViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(LocalDate.now()));
                 break;
         }
         return fragment;

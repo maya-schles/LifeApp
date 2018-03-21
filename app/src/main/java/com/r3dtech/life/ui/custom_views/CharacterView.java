@@ -9,7 +9,6 @@ import com.r3dtech.life.R;
 import com.r3dtech.life.logic.avatar.Avatar;
 
 public class CharacterView extends RelativeLayout {
-    private Avatar avatar;
     private AvatarDisplayView avatarView;
     private StatBarView hp;
     private StatBarView xp;
@@ -37,9 +36,8 @@ public class CharacterView extends RelativeLayout {
     }
 
     public void setAvatar(Avatar avatar) {
-        this.avatar = avatar;
         avatarView.setAvatar(avatar);
-        hp.setValues(avatar.getHP(), avatar.getMaxHP());
-        xp.setValues(avatar.getXP(), avatar.getMaxXP());
+        hp.setValuesGetter(avatar::getHP, avatar::getMaxHP);
+        xp.setValuesGetter(avatar::getXP, avatar::getMaxXP);
     }
 }

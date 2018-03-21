@@ -2,6 +2,7 @@ package com.r3dtech.life.ui.custom_views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,11 +12,17 @@ import android.widget.TextView;
 
 import com.r3dtech.life.R;
 
+import java.util.Locale;
+import java.util.concurrent.Callable;
+
 public class StatBarView extends RelativeLayout {
     private BarView barView;
     private TextView statName;
     private TextView progressText;
     private ImageView icon;
+
+    private Callable<Integer> progressGetter = ()->0;
+    private Callable<Integer> maxGetter = ()->100;
 
     public StatBarView(Context context) {
         super(context);
@@ -51,8 +58,23 @@ public class StatBarView extends RelativeLayout {
         progressText = findViewById(R.id.ratio);
     }
 
-    public void setValues(int progress, int max) {
+    public void setValuesGetter(Callable<Integer> progress, Callable<Integer> max) {
+        progressGetter = progress;
+        maxGetter = max;
+    }
+
+    private void setValues(int progress, int max) {
         barView.setRatio(((float) progress)/max);
-        progressText.setText(String.format("%d\\%d", progress, max));
+        progressText.setText(String.format(Locale.CANADA,"%d\\%d", progress, max));
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        try {
+            setValues(progressGetter.call(), maxGetter.call());
+        } catch (Exception e) {
+            throw new RuntimeException("Error getting stat bar values "+e.getMessage());
+        }
+        super.onDraw(canvas);
     }
 }

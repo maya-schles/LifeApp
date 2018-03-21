@@ -17,10 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.r3dtech.life.data_loading.SerializableDataHelper;
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.quests.Quest;
-import com.r3dtech.life.shared_prefs_help.SharedPrefsHelper;
+import com.r3dtech.life.data_loading.SharedPrefsHelper;
 import com.r3dtech.life.ui.Utils;
 import com.r3dtech.life.ui.adapters.MissionEditAdapter;
 import com.r3dtech.life.ui.misc.SwipeItemTouchHelperCallback;
@@ -77,7 +78,7 @@ public abstract class QuestCreateActivity extends AppCompatActivity implements S
         EditText stringInput = dialog.findViewById(R.id.string_input);
         importButton.setOnClickListener((View v)-> {
             try {
-                finish((Quest) SharedPrefsHelper.deserialize(stringInput.getText().toString()));
+                finish((Quest) SerializableDataHelper.deserialize(stringInput.getText().toString()));
             } catch (IOException|ClassNotFoundException e) {
                 throw new RuntimeException("Couldn't load quest from string");
             }
