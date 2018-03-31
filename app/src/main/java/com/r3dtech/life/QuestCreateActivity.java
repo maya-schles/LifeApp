@@ -21,7 +21,6 @@ import com.r3dtech.life.data_loading.SerializableDataHelper;
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.quests.Quest;
-import com.r3dtech.life.data_loading.SharedPrefsHelper;
 import com.r3dtech.life.ui.Utils;
 import com.r3dtech.life.ui.adapters.MissionEditAdapter;
 import com.r3dtech.life.ui.misc.SwipeItemTouchHelperCallback;

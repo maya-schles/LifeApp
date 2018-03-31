@@ -6,6 +6,8 @@ import com.r3dtech.life.logic.quests.missions.MissionUpdateListener;
 import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.logic.quests.quests.QuestUpdateListener;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +19,10 @@ public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
     GameQuest(String title, String description, Difficulty difficulty, List<T> missionList) {
         super(title, description, difficulty);
         this.missionList = missionList;
+        init();
+    }
+
+    private void init() {
         for (Mission mission: missionList) {
             mission.setUpdateListener((this::onMissionComplete));
         }
@@ -28,6 +34,8 @@ public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
         }
         missionUpdateListener.onComplete(mission);
     }
+
+
     @Override
     public boolean isDone(LocalDate date) {
         for (Mission mission : missionList) {
@@ -51,5 +59,11 @@ public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
     @Override
     public void setMissionUpdateListener(MissionUpdateListener listener) {
         this.missionUpdateListener = listener;
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        init();
     }
 }

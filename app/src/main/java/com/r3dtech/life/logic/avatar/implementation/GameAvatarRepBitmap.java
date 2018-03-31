@@ -56,9 +56,6 @@ public class GameAvatarRepBitmap implements AvatarRepBitmap {
 
     @Override
     public Color getColor(int x, int y) {
-        if (x==7 && y== 7) {
-            Log.d("here", "here");
-        }
         for (ItemBitmap layer: viewLayers) {
             if (layer != null && layer.getColor(x, y) != Color.TRANSPARENT) {
                 return layer.getColor(x, y);

@@ -4,6 +4,7 @@ import com.r3dtech.life.data_loading.SerializableDataHelper;
 import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.avatar.Avatar;
 import com.r3dtech.life.logic.avatar.implementation.GameAvatar;
+import com.r3dtech.life.logic.gui.AvatarGui;
 import com.r3dtech.life.logic.quests.QuestDB;
 import com.r3dtech.life.logic.quests.implemetation.GameQuestDB;
 import com.r3dtech.life.logic.quests.missions.Mission;
@@ -19,11 +20,16 @@ public class GameImplementation implements Game{
     private QuestDB questDB;
     private Avatar avatar;
     private SerializableDataHelper dataHelper;
+    private transient AvatarGui avatarGui;
 
     public GameImplementation(SerializableDataHelper gameDataHelper) {
         dataHelper = gameDataHelper;
+        init();
     }
 
+    private void init() {
+        avatarGui = (gui)->{};
+    }
     @Override
     public Avatar getAvatar() {
         return avatar;
@@ -42,15 +48,17 @@ public class GameImplementation implements Game{
     @Override
     public void start() {
         loadGameData();
+        //clearData();
+        avatarGui.update(avatar);
     }
 
     private void loadQuestDB() throws IOException {
         questDB = (QuestDB) dataHelper.read(QUEST_DB_TAG);
         if (questDB == null) {
             questDB = new GameQuestDB();
-            questDB.setMissionUpdateListener(this::onMissionComplete);
-            questDB.setQuestUpdateListener(this::onQuestComplete);
         }
+        questDB.setMissionUpdateListener(this::onMissionComplete);
+        questDB.setQuestUpdateListener(this::onQuestComplete);
     }
 
     private void loadAvatar() throws IOException {
@@ -86,13 +94,25 @@ public class GameImplementation implements Game{
     }
     public void clearData() {
         questDB = new GameQuestDB();
-        avatar = new GameAvatar(avatar.getWeight(), avatar.getHeight(), avatar.name());
+        if (avatar != null) {
+            avatar = new GameAvatar(avatar.getWeight(), avatar.getHeight(), avatar.name());
+        } else {
+            avatar = new GameAvatar(44, 168, "R3dtech");
+        }
     }
 
     private void onMissionComplete(Mission mission) {
         avatar.reward(mission.getReward());
+        avatarGui.update(avatar);
     }
     private void onQuestComplete(Quest quest) {
         avatar.reward(quest.getReward());
+        avatarGui.update(avatar);
+    }
+
+    @Override
+    public void bindAvatarGui(AvatarGui avatarGui) {
+        this.avatarGui = avatarGui;
+        avatarGui.update(avatar);
     }
 }

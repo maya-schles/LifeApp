@@ -1,6 +1,5 @@
 package com.r3dtech.life.ui.adapters.reference_view_holders;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;

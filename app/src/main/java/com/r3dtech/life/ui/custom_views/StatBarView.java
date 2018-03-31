@@ -56,6 +56,7 @@ public class StatBarView extends RelativeLayout {
         statName = findViewById(R.id.name);
         icon = findViewById(R.id.stat_icon);
         progressText = findViewById(R.id.ratio);
+        setWillNotDraw(false);
     }
 
     public void setValuesGetter(Callable<Integer> progress, Callable<Integer> max) {
@@ -72,6 +73,7 @@ public class StatBarView extends RelativeLayout {
     protected void onDraw(Canvas canvas) {
         try {
             setValues(progressGetter.call(), maxGetter.call());
+            barView.invalidate();
         } catch (Exception e) {
             throw new RuntimeException("Error getting stat bar values "+e.getMessage());
         }

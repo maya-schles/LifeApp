@@ -16,4 +16,8 @@ public class BasicSwipeViewHolder extends RecyclerView.ViewHolder{
     public View getForeground() {
         return foreground;
     }
+
+    public boolean canSwipe() {
+        return true;
+    }
 }

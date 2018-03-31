@@ -7,8 +7,9 @@ import android.widget.RelativeLayout;
 
 import com.r3dtech.life.R;
 import com.r3dtech.life.logic.avatar.Avatar;
+import com.r3dtech.life.logic.gui.AvatarGui;
 
-public class CharacterView extends RelativeLayout {
+public class CharacterView extends RelativeLayout implements AvatarGui{
     private AvatarDisplayView avatarView;
     private StatBarView hp;
     private StatBarView xp;
@@ -35,9 +36,16 @@ public class CharacterView extends RelativeLayout {
         xp = findViewById(R.id.xp);
     }
 
-    public void setAvatar(Avatar avatar) {
+    private void setAvatar(Avatar avatar) {
         avatarView.setAvatar(avatar);
         hp.setValuesGetter(avatar::getHP, avatar::getMaxHP);
         xp.setValuesGetter(avatar::getXP, avatar::getMaxXP);
+    }
+
+    @Override
+    public void update(Avatar avatar) {
+        setAvatar(avatar);
+        xp.invalidate();
+        hp.invalidate();
     }
 }

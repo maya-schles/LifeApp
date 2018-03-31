@@ -35,9 +35,4 @@ public class MissionsViewAdapter<T extends Mission> extends RecyclerView.Adapter
     public int getItemCount() {
         return missionList.size();
     }
-
-    public void deleteMission(int position) {
-        missionList.remove(position);
-        notifyItemRemoved(position);
-    }
 }

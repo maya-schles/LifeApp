@@ -9,6 +9,8 @@ import com.r3dtech.life.logic.quests.QuestDB;
 import com.r3dtech.life.logic.quests.quests.QuestUpdateListener;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +18,12 @@ import java.util.List;
 public class GameQuestDB implements QuestDB {
     private List<MainQuest> mainQuests = new ArrayList<>();
     private List<SideQuest> sideQuests = new ArrayList<>();
-    private transient QuestUpdateListener updateListener = (Quest q)->{};
-    private transient MissionUpdateListener missionUpdateListener = (Mission m)->{};
+    private transient QuestUpdateListener updateListener;
+    private transient MissionUpdateListener missionUpdateListener;
+
+    public GameQuestDB() {
+        init();
+    }
 
     @Override
     public List<MainMission> getMissionsForDate(LocalDate date) {
@@ -30,10 +36,27 @@ public class GameQuestDB implements QuestDB {
                 }
             }
         }
-
         return res;
     }
 
+    private void init() {
+        for(Quest quest:sideQuests) {
+            quest.setUpdateListener(this::onQuestDone);
+            quest.setMissionUpdateListener(this::onMissionDone);
+        }
+        for(Quest quest:mainQuests) {
+            quest.setUpdateListener(this::onQuestDone);
+            quest.setMissionUpdateListener(this::onMissionDone);
+        }
+        updateListener = (Quest q)->{};
+        missionUpdateListener = (Mission m)->{};
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+
+        init();
+    }
     @Override
     public void addMainQuest(MainQuest quest) {
         mainQuests.add(quest);
@@ -94,6 +117,7 @@ public class GameQuestDB implements QuestDB {
 
     @Override
     public void setMissionUpdateListener(MissionUpdateListener listener) {
+        missionUpdateListener = listener;
     }
 
     private void onQuestDone(Quest quest) {

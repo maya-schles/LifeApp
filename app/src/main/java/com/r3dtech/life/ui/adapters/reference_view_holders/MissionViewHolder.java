@@ -13,6 +13,7 @@ public class MissionViewHolder<T extends Mission> extends BasicSwipeViewHolder{
     private TextView title;
     private TextView description;
     private TextView difficulty;
+    private T mission;
 
     public MissionViewHolder(View itemView) {
         super(itemView);
@@ -26,11 +27,17 @@ public class MissionViewHolder<T extends Mission> extends BasicSwipeViewHolder{
     }
 
     public void setMission(T mission) {
+        this.mission = mission;
         title.setText(mission.title());
         description.setText(mission.description());
         difficulty.setText(mission.getDifficulty().name());
         if (mission.isDoneForDay(LocalDate.now())) {
             getForeground().setBackgroundColor(Color.LTGRAY);
         }
+    }
+
+    @Override
+    public boolean canSwipe() {
+        return !mission.isDoneForDay(LocalDate.now());
     }
 }

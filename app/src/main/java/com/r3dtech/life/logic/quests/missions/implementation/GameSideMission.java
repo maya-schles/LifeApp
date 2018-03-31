@@ -7,7 +7,6 @@ import java.time.LocalDate;
 
 public class GameSideMission extends GameMission implements SideMission {
     private boolean isComplete = false;
-    private boolean isFailed = false;
 
     public GameSideMission(String title, String description, Difficulty difficulty) {
         super(title, description, difficulty);
@@ -22,11 +21,6 @@ public class GameSideMission extends GameMission implements SideMission {
     public void setDone(LocalDate date) {
         isComplete = true;
         updateListener.onComplete(this);
-    }
-
-    @Override
-    public void setFailed() {
-        isFailed = true;
     }
 
     @Override

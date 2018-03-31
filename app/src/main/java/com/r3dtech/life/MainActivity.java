@@ -19,7 +19,6 @@ import com.r3dtech.life.logic.quests.quests.MainQuest;
 import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
 import com.r3dtech.life.data_loading.SharedPrefsHelper;
-import com.r3dtech.life.ui.custom_views.CharacterView;
 import com.r3dtech.life.ui.fragments.MissionsViewFragment;
 import com.r3dtech.life.ui.fragments.QuestListViewFragment;
 import com.r3dtech.life.ui.fragments.QuestViewFragment;
@@ -50,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ((CharacterView) findViewById(R.id.character_view)).setAvatar(game.getAvatar());
+        game.bindAvatarGui(findViewById(R.id.character_view));
         ((FloatingActionMenu) findViewById(R.id.create_quest_menu)).setClosedOnTouchOutside(true);
+
+        findViewById(R.id.character_view).invalidate();
     }
 
     @Override

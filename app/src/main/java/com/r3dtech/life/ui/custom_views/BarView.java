@@ -42,6 +42,8 @@ public class BarView extends View {
         progressPaint = new Paint();
         progressPaint.setColor(Color.RED);
         ratio = 1/3f;
+
+        setWillNotDraw(false);
     }
 
     public void setRatio(float ratio) {

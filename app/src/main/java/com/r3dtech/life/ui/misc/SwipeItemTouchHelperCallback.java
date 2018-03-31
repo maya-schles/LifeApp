@@ -26,11 +26,15 @@ public class SwipeItemTouchHelperCallback extends ItemTouchHelper.SimpleCallback
 
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-        listener.onSwiped(viewHolder, direction, viewHolder.getAdapterPosition());
+        if (((BasicSwipeViewHolder) viewHolder).canSwipe()) {
+            listener.onSwiped(viewHolder, direction, viewHolder.getAdapterPosition());
+        }
     }
 
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-        getDefaultUIUtil().onDraw(c, recyclerView, ((BasicSwipeViewHolder) viewHolder).getForeground(), dX, dY, actionState, isCurrentlyActive);
+        if (((BasicSwipeViewHolder) viewHolder).canSwipe()) {
+            getDefaultUIUtil().onDraw(c, recyclerView, ((BasicSwipeViewHolder) viewHolder).getForeground(), dX, dY, actionState, isCurrentlyActive);
+        }
     }
 }

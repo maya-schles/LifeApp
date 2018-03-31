@@ -13,12 +13,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ItemBitmapDB {
-    public static final String BACKGROUND_ID = "background";
-    public static final String BODY_ID = "body";
-    public static final String PANTS_ID = "pants";
-    public static final String SHIRT_ID = "shirt";
-    public static final String SHOES_ID = "shoes";
-    public static final String HAIR_ID = "hair";
+    static final String BACKGROUND_ID = "background";
+    static final String BODY_ID = "body";
+    static final String PANTS_ID = "pants";
+    static final String SHIRT_ID = "shirt";
+    static final String SHOES_ID = "shoes";
+    static final String HAIR_ID = "hair";
 
     public static class DataItemBitmap implements ItemBitmap {
         private int[][] bitmap = new int[SIZE][SIZE];
