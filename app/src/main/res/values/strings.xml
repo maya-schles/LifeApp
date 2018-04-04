@@ -2,7 +2,7 @@
     <string name="app_name">life</string>
 
     <!-- nav menu strings -->
-    <string name="avatar_tab">Avatar</string>
+    <string name="stats_tab">Stats</string>
     <string name="quests_title">Quests</string>
     <string name="daily_missions_tab">Today\'s Missions</string>
     <string name="main_quests_tab">Main Quests</string>

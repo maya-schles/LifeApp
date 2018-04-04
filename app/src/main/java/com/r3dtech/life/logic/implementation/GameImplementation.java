@@ -47,24 +47,26 @@ public class GameImplementation implements Game{
 
     @Override
     public void start() {
+        clearData();
         loadGameData();
-        //clearData();
         avatarGui.update(avatar);
     }
 
     private void loadQuestDB() throws IOException {
         questDB = (QuestDB) dataHelper.read(QUEST_DB_TAG);
         if (questDB == null) {
-            questDB = new GameQuestDB();
+            initQuestDB();
         }
-        questDB.setMissionUpdateListener(this::onMissionComplete);
-        questDB.setQuestUpdateListener(this::onQuestComplete);
+        else {
+            questDB.setMissionUpdateListener(this::onMissionComplete);
+            questDB.setQuestUpdateListener(this::onQuestComplete);
+        }
     }
 
     private void loadAvatar() throws IOException {
         avatar = (Avatar) dataHelper.read(AVATAR_TAG);
         if (avatar == null) {
-            avatar = new GameAvatar(44, 168, "R3dtech");
+            initAvatar();
         }
     }
     private void loadGameData() {
@@ -92,12 +94,22 @@ public class GameImplementation implements Game{
             throw new RuntimeException("Couldn't save avatar "+e.getMessage());
         }
     }
-    public void clearData() {
+
+    private void initQuestDB() {
         questDB = new GameQuestDB();
+        questDB.setMissionUpdateListener(this::onMissionComplete);
+        questDB.setQuestUpdateListener(this::onQuestComplete);
+    }
+
+    private void initAvatar() {
+        avatar = new GameAvatar(44, 168, "R3dtech");
+    }
+    public void clearData() {
+        initQuestDB();
         if (avatar != null) {
             avatar = new GameAvatar(avatar.getWeight(), avatar.getHeight(), avatar.name());
         } else {
-            avatar = new GameAvatar(44, 168, "R3dtech");
+            initAvatar();
         }
     }
 

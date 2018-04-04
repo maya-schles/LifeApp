@@ -3,6 +3,7 @@ package com.r3dtech.life.logic.avatar.implementation;
 import com.r3dtech.life.logic.avatar.Stats;
 
 public class GameStats implements Stats {
+    static final long serialVersionUID = 4L;
     private Stat[] stats = new Stat[STATS_NUM];
 
     private GameStats() {

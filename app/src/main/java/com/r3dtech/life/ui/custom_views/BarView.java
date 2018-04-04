@@ -48,10 +48,12 @@ public class BarView extends View {
 
     public void setRatio(float ratio) {
         this.ratio = ratio;
+        invalidate();
     }
 
     public void setColor(int color) {
         progressPaint.setColor(color);
+        invalidate();
     }
 
     private float getRatio() {

@@ -5,6 +5,7 @@ import com.r3dtech.life.logic.quests.missions.Repeat;
 import java.time.LocalDate;
 
 abstract class MissionRepeat implements Repeat{
+    static final long serialVersionUID = 18L;
     private boolean[] daysOfWeek;
     private LocalDate startDate;
 
@@ -19,7 +20,7 @@ abstract class MissionRepeat implements Repeat{
 
     @Override
     public boolean occursOnDay(LocalDate date) {
-        return !date.isBefore(startDate)&&daysOfWeek[date.getDayOfWeek().getValue()%7]&&!isComplete(date);
+        return !date.isBefore(startDate)&&daysOfWeek[date.getDayOfWeek().getValue()%7];
     }
 
     @Override

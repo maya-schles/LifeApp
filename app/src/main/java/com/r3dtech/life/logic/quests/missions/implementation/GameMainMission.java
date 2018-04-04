@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 public class GameMainMission extends GameMission implements MainMission {
+    static final long serialVersionUID = 15L;
     private Repeat repeat;
     private Map<LocalDate, Boolean> datesDone = new HashMap<>();
     private Map<LocalDate, Boolean> datesDismissed = new HashMap<>();
@@ -54,9 +55,7 @@ public class GameMainMission extends GameMission implements MainMission {
         if (!isDoneForDay(date)) {
             repeat.addOccurance();
             datesDone.put(date, true);
-        }
-        if (isComplete(date)) {
-            updateListener.onComplete(this);
+            updateListener.onDone(this);
         }
     }
 

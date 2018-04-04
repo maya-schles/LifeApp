@@ -4,6 +4,7 @@ package com.r3dtech.life.logic.avatar.implementation;
 import com.r3dtech.life.logic.avatar.Inventory;
 
 public class GameInventory implements Inventory {
+    static final long serialVersionUID = 2L;
     private int money;
 
     @Override

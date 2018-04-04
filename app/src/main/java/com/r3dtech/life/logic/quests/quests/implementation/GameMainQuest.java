@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class GameMainQuest extends GameQuest<MainMission> implements MainQuest {
+    static final long serialVersionUID = 20L;
     public GameMainQuest(String title, String description, Difficulty difficulty, List<MainMission> missionList) {
         super(title, description, difficulty, missionList);
     }

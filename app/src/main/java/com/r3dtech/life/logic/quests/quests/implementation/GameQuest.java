@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
+    static final long serialVersionUID = 21L;
+
     private List<T> missionList;
     private transient QuestUpdateListener updateListener = (Quest q)->{};
     private transient MissionUpdateListener missionUpdateListener = (Mission m)->{};
@@ -32,7 +34,7 @@ public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
         if (isDone(LocalDate.now())) {
             updateListener.onComplete(this);
         }
-        missionUpdateListener.onComplete(mission);
+        missionUpdateListener.onDone(mission);
     }
 
 

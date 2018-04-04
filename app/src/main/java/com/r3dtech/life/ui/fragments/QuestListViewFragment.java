@@ -13,7 +13,6 @@ import java.util.List;
 public class QuestListViewFragment extends RecyclerViewFragment<Quest> {
     @Override
     protected RecyclerView.Adapter getAdapter(List<Quest> itemList) {
-        return new QuestViewAdapter(itemList, (RecyclerView.ViewHolder v) -> {
-            ((MainActivity) getActivity()).showQuest(((QuestViewHolder) v).getQuest());});
+        return new QuestViewAdapter(itemList);
     }
 }

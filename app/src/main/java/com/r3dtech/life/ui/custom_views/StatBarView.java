@@ -2,7 +2,6 @@ package com.r3dtech.life.ui.custom_views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -13,16 +12,12 @@ import android.widget.TextView;
 import com.r3dtech.life.R;
 
 import java.util.Locale;
-import java.util.concurrent.Callable;
 
 public class StatBarView extends RelativeLayout {
     private BarView barView;
     private TextView statName;
     private TextView progressText;
     private ImageView icon;
-
-    private Callable<Integer> progressGetter = ()->0;
-    private Callable<Integer> maxGetter = ()->100;
 
     public StatBarView(Context context) {
         super(context);
@@ -33,21 +28,26 @@ public class StatBarView extends RelativeLayout {
         super(context, attrs);
         TypedArray a = context.getTheme().obtainStyledAttributes(
                 attrs,
-                R.styleable.StatBarView,
+                R.styleable.StatView,
                 0, 0);
         init(a);
     }
 
     public StatBarView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.StatView,
+                defStyleAttr, 0);
+        init(a);
     }
 
     private void init(TypedArray a) {
         init();
-        barView.setColor(a.getColor(R.styleable.StatBarView_progressColor, Color.RED));
-        statName.setText(a.getString(R.styleable.StatBarView_statName));
-        icon.setImageDrawable(a.getDrawable(R.styleable.StatBarView_statIcon));
+        barView.setColor(a.getColor(R.styleable.StatView_statColor, Color.RED));
+        statName.setText(a.getString(R.styleable.StatView_statName));
+        icon.setImageDrawable(a.getDrawable(R.styleable.StatView_statIcon));
+        invalidate();
     }
 
     private void init() {
@@ -59,24 +59,8 @@ public class StatBarView extends RelativeLayout {
         setWillNotDraw(false);
     }
 
-    public void setValuesGetter(Callable<Integer> progress, Callable<Integer> max) {
-        progressGetter = progress;
-        maxGetter = max;
-    }
-
-    private void setValues(int progress, int max) {
+    public void setValues(int progress, int max) {
         barView.setRatio(((float) progress)/max);
         progressText.setText(String.format(Locale.CANADA,"%d\\%d", progress, max));
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        try {
-            setValues(progressGetter.call(), maxGetter.call());
-            barView.invalidate();
-        } catch (Exception e) {
-            throw new RuntimeException("Error getting stat bar values "+e.getMessage());
-        }
-        super.onDraw(canvas);
     }
 }

@@ -1,6 +1,5 @@
 package com.r3dtech.life.logic.avatar.implementation;
 
-import android.util.Log;
 
 import com.r3dtech.life.logic.avatar.AvatarRepBitmap;
 import com.r3dtech.life.logic.avatar.ItemBitmap;
@@ -13,9 +12,11 @@ import static com.r3dtech.life.logic.avatar.implementation.ItemBitmapDB.SHIRT_ID
 import static com.r3dtech.life.logic.avatar.implementation.ItemBitmapDB.SHOES_ID;
 
 public class GameAvatarRepBitmap implements AvatarRepBitmap {
+    static final long serialVersionUID = 1L;
     private ItemBitmap[] viewLayers = new GameItemRep[VIEW_LAYERS_NUM];
 
-    GameAvatarRepBitmap() {
+    //TODO make package
+    public GameAvatarRepBitmap() {
         viewLayers[BACKGROUND] = new GameItemRep(BACKGROUND_ID, 0);
         viewLayers[BODY] = new GameItemRep(BODY_ID, 0);
         viewLayers[PANTS] = new GameItemRep(PANTS_ID, 0);

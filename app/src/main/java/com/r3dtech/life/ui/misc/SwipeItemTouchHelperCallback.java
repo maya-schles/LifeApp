@@ -35,6 +35,8 @@ public class SwipeItemTouchHelperCallback extends ItemTouchHelper.SimpleCallback
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         if (((BasicSwipeViewHolder) viewHolder).canSwipe()) {
             getDefaultUIUtil().onDraw(c, recyclerView, ((BasicSwipeViewHolder) viewHolder).getForeground(), dX, dY, actionState, isCurrentlyActive);
+        } else {
+            getDefaultUIUtil().onDraw(c, recyclerView, ((BasicSwipeViewHolder) viewHolder).getForeground(), 0, dY, actionState, isCurrentlyActive);
         }
     }
 }

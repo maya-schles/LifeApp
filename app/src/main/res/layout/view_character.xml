@@ -22,15 +22,43 @@
             android:id="@+id/hp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:progressColor="@android:color/holo_red_dark"
+            app:statColor="@android:color/holo_red_dark"
             app:statIcon="@drawable/ic_health"
             app:statName="HP"/>
         <com.r3dtech.life.ui.custom_views.StatBarView
             android:id="@+id/xp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:progressColor="@android:color/holo_green_dark"
+            app:statColor="@android:color/holo_green_dark"
             app:statIcon="@drawable/ic_xp"
             app:statName="XP"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
+
+            <com.r3dtech.life.ui.custom_views.StatTextView
+                android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:statColor="@color/colorAccent"
+                app:statIcon="@drawable/ic_xp"
+                app:statName="LVL" />
+
+
+            <com.r3dtech.life.ui.custom_views.StatTextView
+                android:id="@+id/money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                app:statName="coins"
+                app:statColor="@color/colorMoney"
+                app:statIcon="@drawable/ic_money"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

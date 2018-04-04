@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameQuestDB implements QuestDB {
+    static final long serialVersionUID = 11L;
     private List<MainQuest> mainQuests = new ArrayList<>();
     private List<SideQuest> sideQuests = new ArrayList<>();
     private transient QuestUpdateListener updateListener;
@@ -99,12 +100,7 @@ public class GameQuestDB implements QuestDB {
     public List<SideQuest> getSideQuests() {
         return sideQuests;
     }
-
-    @Override
-    public void setMissionAsDone(Mission mission, LocalDate date) {
-        mission.setDone(date);
-    }
-
+    
     @Override
     public void dismissMission(MainMission mission, LocalDate date) {
         mission.dismissForDay(date);
@@ -125,6 +121,6 @@ public class GameQuestDB implements QuestDB {
     }
 
     private void onMissionDone(Mission mission) {
-        missionUpdateListener.onComplete(mission);
+        missionUpdateListener.onDone(mission);
     }
 }

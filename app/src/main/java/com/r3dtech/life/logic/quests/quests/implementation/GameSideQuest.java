@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 public class GameSideQuest extends GameQuest<SideMission> implements SideQuest {
+    static final long serialVersionUID = 22L;
+
     public GameSideQuest(String title, String description, Difficulty difficulty, List<SideMission> missionList) {
         super(title, description, difficulty, missionList);
     }

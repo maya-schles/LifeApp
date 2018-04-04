@@ -4,6 +4,7 @@ package com.r3dtech.life.logic.avatar.implementation.itembitmaps;
 import com.r3dtech.life.logic.avatar.implementation.ItemBitmapDB;
 
 public class BackgroundBitmap extends ItemBitmapDB.DataItemBitmap {
+    static final long serialVersionUID = 5L;
     private static final int[][] BITMAP = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1, 1, 1, 1, 1},

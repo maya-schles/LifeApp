@@ -129,7 +129,7 @@ public abstract class QuestCreateActivity extends AppCompatActivity implements S
     }
 
     private List<Mission> updateMissionList() {
-        for (int i = 0; i < missionRecyclerView.getChildCount(); i++) {
+        for (int i = 0; i < missionRecyclerView.getAdapter().getItemCount(); i++) {
             MissionEditViewHolder viewHolder = (MissionEditViewHolder)
                     missionRecyclerView.findViewHolderForAdapterPosition(i);
             viewHolder.updateMission();

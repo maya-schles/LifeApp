@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 
 public class GameSideMission extends GameMission implements SideMission {
+    static final long serialVersionUID = 17L;
     private boolean isComplete = false;
 
     public GameSideMission(String title, String description, Difficulty difficulty) {
@@ -20,7 +21,7 @@ public class GameSideMission extends GameMission implements SideMission {
     @Override
     public void setDone(LocalDate date) {
         isComplete = true;
-        updateListener.onComplete(this);
+        updateListener.onDone(this);
     }
 
     @Override

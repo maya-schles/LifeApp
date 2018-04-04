@@ -12,9 +12,10 @@ import android.view.View;
 import com.r3dtech.life.logic.avatar.Avatar;
 import com.r3dtech.life.logic.avatar.AvatarRepBitmap;
 import com.r3dtech.life.logic.avatar.ItemBitmap;
+import com.r3dtech.life.logic.avatar.implementation.GameAvatarRepBitmap;
 
 public class AvatarDisplayView extends View {
-    private AvatarRepBitmap avatarRep;
+    private AvatarRepBitmap avatarRep = new GameAvatarRepBitmap();
     private Paint paint;
     private Rect rect;
 

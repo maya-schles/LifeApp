@@ -97,13 +97,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment getFragmentForNav(int id) {
         RecyclerViewFragment fragment = null;
         switch (id) {
-            case R.id.side_quests:
+            case R.id.nav_side_quests:
                 fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, game.getQuestDB().getSideQuests());
                 break;
-            case R.id.main_quests:
+            case R.id.nav_main_quests:
                 fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, game.getQuestDB().getMainQuests());
                 break;
-            case R.id.missions:
+            case R.id.nav_missions:
                 fragment = RecyclerViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(LocalDate.now()));
                 break;
         }

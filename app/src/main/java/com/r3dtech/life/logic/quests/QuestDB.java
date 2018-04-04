@@ -16,7 +16,6 @@ public interface QuestDB extends Serializable {
     List<MainMission> getMissionsForDate(LocalDate date);
     void addMainQuest(MainQuest quest);
     void addSideQuest(SideQuest quest);
-    void setMissionAsDone(Mission mission, LocalDate date);
     void dismissMission(MainMission mission, LocalDate date);
     Quest getParentQuest(Mission mission);
     List<MainQuest> getMainQuests();

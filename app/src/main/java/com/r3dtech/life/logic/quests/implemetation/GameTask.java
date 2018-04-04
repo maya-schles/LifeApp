@@ -4,6 +4,7 @@ import com.r3dtech.life.logic.quests.Reward;
 import com.r3dtech.life.logic.quests.Task;
 
 public class GameTask implements Task {
+    static final long serialVersionUID = 13L;
     private String title;
     private String description;
     private Reward reward;

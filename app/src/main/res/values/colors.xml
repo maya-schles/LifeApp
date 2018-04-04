@@ -7,4 +7,5 @@
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorAccent">#95b438</color>
     <color name="colorThird">#3895b4</color>
+    <color name="colorMoney">#ddaa00</color>
 </resources>

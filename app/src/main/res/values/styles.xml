@@ -13,8 +13,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Text_Info_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="Text_Stat_Style" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/stat_view_height</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="Text_Title_1_Style" parent="@android:style/TextAppearance">

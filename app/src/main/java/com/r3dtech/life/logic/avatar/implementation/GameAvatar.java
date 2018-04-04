@@ -8,6 +8,7 @@ import com.r3dtech.life.logic.quests.Reward;
 
 
 public class GameAvatar implements Avatar {
+    static final long serialVersionUID = 0L;
     private Stats stats;
     private Inventory inventory;
     private AvatarRepBitmap avatarRep;
