@@ -29,7 +29,7 @@ public class QuestViewFragment<T extends Mission> extends MissionsViewFragment<T
     }
 
     @Override
-    protected int getLayoutResource() {
+    protected int getHeaderLayoutResource() {
         return R.layout.viewholder_quest;
     }
 

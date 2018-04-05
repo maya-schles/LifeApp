@@ -3,6 +3,7 @@ package com.r3dtech.life;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewStub;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,9 +47,14 @@ public abstract class QuestCreateActivity extends AppCompatActivity implements S
         setContentView(R.layout.activity_quest_create);
 
         findViews();
-        populateDifficultySpinner();
+        Utils.populateDifficultySpinner(difficultySpinner, this);
         changeTitle();
-        adapter = (MissionEditAdapter) getMissionAdater(initMissionsList());
+
+        ViewStub stub = findViewById(R.id.extra);
+        stub.setLayoutResource(getExtraLayoutResource());
+        initExtra(stub.inflate());
+
+        adapter = (MissionEditAdapter) getMissionAdapter(initMissionsList());
         Utils.initRecyclerView(this, missionRecyclerView, adapter);
         new ItemTouchHelper(new SwipeItemTouchHelperCallback(0, LEFT, this)).attachToRecyclerView(missionRecyclerView);
     }
@@ -69,6 +76,13 @@ public abstract class QuestCreateActivity extends AppCompatActivity implements S
         return true;
     }
 
+    protected int getExtraLayoutResource() {
+        return R.layout.header_empty;
+    }
+
+    protected void initExtra(View extra) {
+
+    }
     private void importQuestFromString() {
         Dialog dialog = new AlertDialog.Builder(this).
                 setTitle("Import Quest From String").
@@ -106,15 +120,7 @@ public abstract class QuestCreateActivity extends AppCompatActivity implements S
         getSupportActionBar().setTitle(getActionBarTitle());
     }
 
-    abstract RecyclerView.Adapter getMissionAdater(List<Mission> missionList);
-
-
-    private void populateDifficultySpinner() {
-        ArrayAdapter<String> difficultySpinnerAdapter =
-                new ArrayAdapter<>(this,
-                        R.layout.support_simple_spinner_dropdown_item, Task.Difficulty.names());
-        difficultySpinner.setAdapter(difficultySpinnerAdapter);
-    }
+    abstract RecyclerView.Adapter getMissionAdapter(List<Mission> missionList);
 
     public void addMissionCallback(View v) {
         addMission();

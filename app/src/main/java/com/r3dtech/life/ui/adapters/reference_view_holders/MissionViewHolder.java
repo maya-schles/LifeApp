@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.r3dtech.life.R;
+import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
 
 import java.time.LocalDate;
@@ -34,8 +35,12 @@ public class MissionViewHolder<T extends Mission> extends RecyclerView.ViewHolde
         title.setText(mission.title());
         description.setText(mission.description());
         difficulty.setText(mission.getDifficulty().name());
-        if (mission.isDoneForDay(LocalDate.now())) {
+        if (mission instanceof MainMission && ((MainMission) mission).isDoneForDay(LocalDate.now())) {
             getForeground().setBackgroundColor(Color.LTGRAY);
+        }
+
+        if (mission.isComplete(LocalDate.now())) {
+            getForeground().setBackgroundColor(Color.rgb(144, 238, 144));
         }
     }
 
@@ -45,6 +50,9 @@ public class MissionViewHolder<T extends Mission> extends RecyclerView.ViewHolde
     }
 
     public boolean canSwipe() {
-        return !mission.isDoneForDay(LocalDate.now());
+        if (mission instanceof MainMission) {
+            return !((MainMission) mission).isDoneForDay(LocalDate.now());
+        }
+        return !mission.isComplete(LocalDate.now());
     }
 }

@@ -2,13 +2,13 @@ package com.r3dtech.life.ui.adapters.reference_view_holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.Mission;
+import com.r3dtech.life.ui.Utils;
 
 public class MissionEditViewHolder extends RecyclerView.ViewHolder implements BasicSwipeViewHolder {
     private EditText titleEditText;
@@ -25,7 +25,7 @@ public class MissionEditViewHolder extends RecyclerView.ViewHolder implements Ba
 
     public void init() {
         findViews();
-        populateDifficultySpinner();
+        Utils.populateDifficultySpinner(difficultySpinner, itemView.getContext());
     }
 
     protected void findViews() {
@@ -33,12 +33,6 @@ public class MissionEditViewHolder extends RecyclerView.ViewHolder implements Ba
         titleEditText = itemView.findViewById(R.id.title);
         descriptionEditText = itemView.findViewById(R.id.description);
         difficultySpinner = itemView.findViewById(R.id.difficulty_spinner);
-    }
-
-    private void populateDifficultySpinner() {
-        ArrayAdapter<String> difficultySpinnerAdapter = new ArrayAdapter<>(itemView.getContext(),
-                R.layout.support_simple_spinner_dropdown_item, Task.Difficulty.names());
-        difficultySpinner.setAdapter(difficultySpinnerAdapter);
     }
 
     public void setMission(Mission mission) {

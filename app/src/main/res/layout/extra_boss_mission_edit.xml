@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/boss_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Text_Regular_Style"
+        android:text="@string/boss_label"/>
+
+    <EditText
+        android:id="@+id/title"
+        android:textAppearance="@style/Text_Title_2_Style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/boss_title"
+        android:layout_toStartOf="@+id/difficulty_spinner"
+        android:textColor="@null"
+        android:hint="@string/boss_title_hint" />
+
+    <Spinner
+        android:id="@+id/difficulty_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/title"/>
+
+    <EditText
+        android:id="@+id/description"
+        android:textAppearance="@style/Text_Regular_Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_alignParentStart="true"
+        android:textColor="@null"
+        android:hint="@string/boss_description_hint"/>
+</RelativeLayout>

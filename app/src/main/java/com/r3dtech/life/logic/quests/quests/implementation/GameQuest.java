@@ -8,10 +8,9 @@ import com.r3dtech.life.logic.quests.quests.QuestUpdateListener;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.time.LocalDate;
 import java.util.List;
 
-public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
+public abstract class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
     static final long serialVersionUID = 21L;
 
     private List<T> missionList;
@@ -31,21 +30,10 @@ public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
     }
 
     private void onMissionComplete(Mission mission) {
-        if (isDone(LocalDate.now())) {
+        if (isDone()) {
             updateListener.onComplete(this);
         }
         missionUpdateListener.onDone(mission);
-    }
-
-
-    @Override
-    public boolean isDone(LocalDate date) {
-        for (Mission mission : missionList) {
-            if (!mission.isComplete(date)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
@@ -68,4 +56,6 @@ public class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
 
         init();
     }
+
+
 }

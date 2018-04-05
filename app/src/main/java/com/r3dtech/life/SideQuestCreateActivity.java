@@ -36,7 +36,7 @@ public class SideQuestCreateActivity extends QuestCreateActivity {
     }
 
     @Override
-    RecyclerView.Adapter getMissionAdater(List<Mission> missionList) {
+    RecyclerView.Adapter getMissionAdapter(List<Mission> missionList) {
         return new MissionEditAdapter<>(convertMissionList(missionList), MissionEditViewHolder.class);
     }
 

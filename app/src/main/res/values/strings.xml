@@ -10,12 +10,15 @@
 
     <!-- text labels -->
     <string name="missions_label">missions</string>
+    <string name="boss_label">boss fight</string>
 
     <!-- text hints -->
     <string name="quest_title_hint">Title</string>
     <string name="quest_description_hint">Description</string>
     <string name="mission_title_hint">Title</string>
     <string name="mission_description_hint">Description</string>
+    <string name="boss_title_hint">Boss Name</string>
+    <string name="boss_description_hint">Boss Description</string>
 
     <!-- button texts -->
     <string name="add_mission">Add Mission</string>

@@ -29,7 +29,7 @@ public abstract class RecyclerViewFragment<T> extends Fragment{
         }
     }
 
-    protected int getLayoutResource() {
+    protected int getHeaderLayoutResource() {
         return R.layout.header_empty;
     }
 
@@ -40,7 +40,7 @@ public abstract class RecyclerViewFragment<T> extends Fragment{
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         Utils.initRecyclerView(getContext(), recyclerView, getAdapter(itemList));
         ViewStub stub = view.findViewById(R.id.header);
-        stub.setLayoutResource(getLayoutResource());
+        stub.setLayoutResource(getHeaderLayoutResource());
         initHeader(stub.inflate());
         return view;
     }

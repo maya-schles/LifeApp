@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -43,25 +42,32 @@
         android:text="@string/add_mission"
         android:onClick="addMissionCallback"/>
 
-    <TextView
-        android:id="@+id/missions_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/description"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_alignParentStart="true"
-        android:textAppearance="@style/Text_Regular_Style"
-        android:text="@string/missions_label"
-        android:labelFor="@+id/recycler_view"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/missions_label"
-        android:layout_above="@+id/create_quest_button">
+        android:layout_below="@+id/description"
+        android:layout_above="@+id/create_quest_button"
+        android:orientation="vertical">
+        <ViewStub
+            android:id="@+id/extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
-    </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:id="@+id/missions_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textAppearance="@style/Text_Regular_Style"
+            android:text="@string/missions_label"
+            android:labelFor="@+id/recycler_view"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/create_quest_button"

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface Quest<T extends Mission> extends Task {
-    boolean isDone(LocalDate date);
+    boolean isDone();
     List<T> getMissions();
     void setUpdateListener(QuestUpdateListener listener);
     void setMissionUpdateListener(MissionUpdateListener listener);

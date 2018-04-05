@@ -2,16 +2,14 @@ package com.r3dtech.life.logic.quests.missions.implementation;
 
 import android.support.annotation.Nullable;
 
-import com.r3dtech.life.logic.quests.missions.SideMission;
+import com.r3dtech.life.logic.quests.missions.BossMission;
 
 import java.time.LocalDate;
 
+public class GameBossMission extends GameMission implements BossMission {
+    private boolean isComplete;
 
-public class GameSideMission extends GameMission implements SideMission {
-    static final long serialVersionUID = 17L;
-    private boolean isComplete = false;
-
-    public GameSideMission(String title, String description, Difficulty difficulty) {
+    public GameBossMission(String title, String description, Difficulty difficulty) {
         super(title, description, difficulty);
     }
 
@@ -23,6 +21,5 @@ public class GameSideMission extends GameMission implements SideMission {
     @Override
     public void setDone(LocalDate date) {
         isComplete = true;
-        updateListener.onDone(this);
     }
 }
