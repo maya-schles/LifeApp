@@ -19,12 +19,8 @@ import java.util.List;
 import static android.support.v7.widget.helper.ItemTouchHelper.RIGHT;
 
 
-public class MissionsViewFragment<T extends Mission> extends RecyclerViewFragment<T> implements SwipeItemTouchHelperCallback.ViewHolderSwipeHelperListener {
+public abstract class MissionsViewFragment<T extends Mission> extends ExpandableListViewFragment<T> implements SwipeItemTouchHelperCallback.ViewHolderSwipeHelperListener {
     private RecyclerView recyclerView;
-    @Override
-    protected RecyclerView.Adapter getAdapter(List<T> itemList) {
-        return new MissionsViewAdapter<>(itemList);
-    }
 
     @Nullable
     @Override

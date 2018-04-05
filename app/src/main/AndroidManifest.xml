@@ -18,8 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SideQuestCreateActivity"/>
-        <activity android:name=".MainQuestCreateActivity"/>
+        <activity android:name=".SideQuestCreateActivity" />
+        <activity android:name=".MainQuestCreateActivity" />
     </application>
 
 </manifest>

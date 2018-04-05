@@ -20,7 +20,6 @@ public class Utils {
         recyclerView.setAdapter(adapter);
     }
 
-
     public static void populateDifficultySpinner(Spinner spinner, Context context) {
         ArrayAdapter<String> difficultySpinnerAdapter =
                 new ArrayAdapter<>(context,

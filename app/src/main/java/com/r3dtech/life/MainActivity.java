@@ -16,13 +16,11 @@ import com.github.clans.fab.FloatingActionMenu;
 import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.implementation.GameImplementation;
 import com.r3dtech.life.logic.quests.quests.MainQuest;
-import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
 import com.r3dtech.life.data_loading.SharedPrefsHelper;
 import com.r3dtech.life.ui.fragments.MissionsViewFragment;
-import com.r3dtech.life.ui.fragments.QuestListViewFragment;
-import com.r3dtech.life.ui.fragments.QuestViewFragment;
-import com.r3dtech.life.ui.fragments.RecyclerViewFragment;
+import com.r3dtech.life.ui.fragments.SideQuestListViewFragment;
+import com.r3dtech.life.ui.fragments.ExpandableListViewFragment;
 import com.r3dtech.life.ui.fragments.StatsFragment;
 
 import java.io.IOException;
@@ -99,25 +97,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Fragment fragment = null;
         switch (id) {
             case R.id.nav_side_quests:
-                fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, game.getQuestDB().getSideQuests());
+                fragment = ExpandableListViewFragment.newInstance(SideQuestListViewFragment.class, game.getQuestDB().getSideQuests());
                 break;
             case R.id.nav_main_quests:
-                fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, game.getQuestDB().getMainQuests());
+                //TODO
                 break;
             case R.id.nav_missions:
-                fragment = RecyclerViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(LocalDate.now()));
+                //TODO
                 break;
             case R.id.nav_stats:
                 fragment = StatsFragment.newInstance(game.getAvatar().getStats());
         }
         return fragment;
     }
-
-    public void showQuest(Quest quest) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flcontent, QuestViewFragment.newInstance(quest)).commit();
-    }
-
 
     public void openNavDrawer(View view) {
         ((DrawerLayout) findViewById(R.id.drawer_layout)).openDrawer(GravityCompat.START);

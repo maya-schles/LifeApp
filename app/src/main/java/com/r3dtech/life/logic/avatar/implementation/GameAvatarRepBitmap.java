@@ -15,7 +15,6 @@ public class GameAvatarRepBitmap implements AvatarRepBitmap {
     static final long serialVersionUID = 1L;
     private ItemBitmap[] viewLayers = new GameItemRep[VIEW_LAYERS_NUM];
 
-    //TODO make package
     public GameAvatarRepBitmap() {
         viewLayers[BACKGROUND] = new GameItemRep(BACKGROUND_ID, 0);
         viewLayers[BODY] = new GameItemRep(BODY_ID, 0);

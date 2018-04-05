@@ -22,7 +22,7 @@ public class MissionsViewAdapter<T extends Mission> extends RecyclerView.Adapter
     @Override
     public MissionViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.viewholder_mission, parent, false);
+                .inflate(R.layout.view_mission_doable, parent, false);
         return new MissionViewHolder<T>(view);
     }
 
