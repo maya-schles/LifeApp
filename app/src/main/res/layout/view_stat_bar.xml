@@ -16,7 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/bar_default_height"
             android:layout_weight="0"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:paddingEnd="@dimen/small_horizontal_margin"
+            android:tint="@android:color/white"/>
         <com.r3dtech.life.ui.custom_views.BarView
             android:id="@+id/bar"
             android:layout_width="0dp"

@@ -52,11 +52,11 @@ public class StatTextView extends AppCompatTextView {
         int size = (int) getContext().getResources().getDimension(R.dimen.stat_view_height);
         drawable.setBounds( 0, 0, size, size);
         setCompoundDrawablesRelative(drawable, null, null, null);
-        invalidate();
     }
 
     private void init() {
         setTextAppearance(R.style.Text_Stat_Style);
+        setCompoundDrawablePadding((int) getContext().getResources().getDimension(R.dimen.small_horizontal_margin));
     }
 
     public void setValue(Object value) {

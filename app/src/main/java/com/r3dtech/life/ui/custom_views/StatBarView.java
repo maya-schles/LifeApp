@@ -44,9 +44,10 @@ public class StatBarView extends RelativeLayout {
 
     private void init(TypedArray a) {
         init();
-        barView.setColor(a.getColor(R.styleable.StatView_statColor, Color.RED));
+        barView.setColor(a.getColor(R.styleable.StatView_statColor, Color.WHITE));
         statName.setText(a.getString(R.styleable.StatView_statName));
         icon.setImageDrawable(a.getDrawable(R.styleable.StatView_statIcon));
+        icon.setColorFilter(a.getColor(R.styleable.StatView_statColor, Color.WHITE));
         invalidate();
     }
 

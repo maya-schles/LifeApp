@@ -23,6 +23,7 @@ import com.r3dtech.life.ui.fragments.MissionsViewFragment;
 import com.r3dtech.life.ui.fragments.QuestListViewFragment;
 import com.r3dtech.life.ui.fragments.QuestViewFragment;
 import com.r3dtech.life.ui.fragments.RecyclerViewFragment;
+import com.r3dtech.life.ui.fragments.StatsFragment;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private Fragment getFragmentForNav(int id) {
-        RecyclerViewFragment fragment = null;
+        Fragment fragment = null;
         switch (id) {
             case R.id.nav_side_quests:
                 fragment = RecyclerViewFragment.newInstance(QuestListViewFragment.class, game.getQuestDB().getSideQuests());
@@ -106,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_missions:
                 fragment = RecyclerViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(LocalDate.now()));
                 break;
+            case R.id.nav_stats:
+                fragment = StatsFragment.newInstance(game.getAvatar().getStats());
         }
         return fragment;
     }

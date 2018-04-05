@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:statColor="@android:color/holo_red_dark"
-            app:statIcon="@drawable/ic_health"
+            app:statIcon="@drawable/ic_heart"
             app:statName="HP"/>
         <com.r3dtech.life.ui.custom_views.StatBarView
             android:id="@+id/xp"

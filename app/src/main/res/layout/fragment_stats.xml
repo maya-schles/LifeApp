@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.r3dtech.life.ui.custom_views.StatTextView
+        android:id="@+id/intelligence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:statName="INT"
+        app:statIcon="@drawable/ic_intelligence"/>
+    <com.r3dtech.life.ui.custom_views.StatTextView
+        android:id="@+id/strength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:statName="STR"
+        app:statIcon="@drawable/ic_strength"/>
+    <com.r3dtech.life.ui.custom_views.StatTextView
+        android:id="@+id/endurance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:statName="END"
+        app:statIcon="@drawable/ic_shield"/>
+    <com.r3dtech.life.ui.custom_views.StatTextView
+        android:id="@+id/charisma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:statName="CHR"
+        app:statIcon="@drawable/ic_people"/>
+</LinearLayout>
