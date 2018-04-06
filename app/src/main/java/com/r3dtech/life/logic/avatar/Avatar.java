@@ -28,4 +28,5 @@ public interface Avatar extends Serializable{
     void heal(int hpToHeal);
 
     void reward(Reward reward);
+    void undoReward(Reward reward);
 }

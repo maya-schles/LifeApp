@@ -5,8 +5,8 @@
     <string name="stats_tab">Stats</string>
     <string name="quests_title">Quests</string>
     <string name="daily_missions_tab">Today\'s Missions</string>
-    <string name="main_quests_tab">Main Quests</string>
-    <string name="side_quests_tab">Side Quests</string>
+    <string name="main_quests_tab">Active Main Quests</string>
+    <string name="side_quests_tab">Active Side Quests</string>
 
     <!-- text labels -->
     <string name="missions_label">missions</string>

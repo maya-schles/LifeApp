@@ -31,6 +31,11 @@ public class TimesRepeat extends MissionRepeat {
         currTimes++;
     }
 
+    @Override
+    public void removeOccurance() {
+        currTimes--;
+    }
+
     public int getRepTimes() {
         return repeatTimes;
     }

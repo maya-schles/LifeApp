@@ -95,6 +95,16 @@ public class GameAvatar implements Avatar {
     }
 
     @Override
+    public void undoReward(Reward reward) {
+        currXP -= reward.getXP();
+        while (currXP < 0) {
+            currXP += maxXP;
+            levelDown();
+        }
+        inventory.payMoney(reward.getMoney());
+    }
+
+    @Override
     public Inventory getInventory() {
         return inventory;
     }
@@ -108,6 +118,9 @@ public class GameAvatar implements Avatar {
         level++;
     }
 
+    private void levelDown() {
+        level--;
+    }
     @Override
     public void damage(int hpToDamage) {
         currHP -= hpToDamage;

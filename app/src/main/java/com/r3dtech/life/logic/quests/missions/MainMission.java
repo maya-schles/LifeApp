@@ -9,6 +9,4 @@ public interface MainMission extends Mission {
     boolean occursOnDay(LocalDate date);
     boolean isDismissedForDay(LocalDate date);
     void dismissForDay(LocalDate date);
-
-    boolean isDoneForDay(LocalDate date);
 }

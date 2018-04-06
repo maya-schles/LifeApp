@@ -14,8 +14,29 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
     static final long serialVersionUID = 21L;
 
     private List<T> missionList;
-    private transient QuestUpdateListener updateListener = (Quest q)->{};
-    private transient MissionUpdateListener missionUpdateListener = (Mission m)->{};
+    private transient QuestUpdateListener updateListener = new QuestUpdateListener() {
+        @Override
+        public void onComplete(Quest quest) {
+
+        }
+
+        @Override
+        public void onUnComplete(Quest quest) {
+
+        }
+    };
+    private transient MissionUpdateListener missionUpdateListener = new MissionUpdateListener() {
+        @Override
+        public void onDone(Mission mission) {
+
+        }
+
+        @Override
+        public void onUndone(Mission mission) {
+
+        }
+    };
+    private boolean isDone;
 
     GameQuest(String title, String description, Difficulty difficulty, List<T> missionList) {
         super(title, description, difficulty);
@@ -25,15 +46,41 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
 
     private void init() {
         for (Mission mission: missionList) {
-            mission.setUpdateListener((this::onMissionComplete));
+            mission.setUpdateListener(new MissionUpdateListener() {
+                @Override
+                public void onDone(Mission mission) {
+                    onMissionDone(mission);
+                }
+
+                @Override
+                public void onUndone(Mission mission) {
+                    onMissionUndone(mission);
+                }
+            });
         }
     }
 
-    private void onMissionComplete(Mission mission) {
-        if (isDone()) {
+    abstract boolean checkIsDone();
+
+    @Override
+    public boolean isDone() {
+        return isDone;
+    }
+
+    private void onMissionDone(Mission mission) {
+        if (checkIsDone() && !isDone) {
+            isDone = true;
             updateListener.onComplete(this);
         }
         missionUpdateListener.onDone(mission);
+    }
+
+    private void onMissionUndone(Mission mission) {
+        if (!checkIsDone() && isDone) {
+            isDone = false;
+            updateListener.onUnComplete(this);
+        }
+        missionUpdateListener.onUndone(mission);
     }
 
     @Override

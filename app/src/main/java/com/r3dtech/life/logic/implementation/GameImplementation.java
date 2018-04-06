@@ -8,7 +8,9 @@ import com.r3dtech.life.logic.gui.AvatarGui;
 import com.r3dtech.life.logic.quests.QuestDB;
 import com.r3dtech.life.logic.quests.implemetation.GameQuestDB;
 import com.r3dtech.life.logic.quests.missions.Mission;
+import com.r3dtech.life.logic.quests.missions.MissionUpdateListener;
 import com.r3dtech.life.logic.quests.quests.Quest;
+import com.r3dtech.life.logic.quests.quests.QuestUpdateListener;
 
 import java.io.IOException;
 
@@ -58,8 +60,7 @@ public class GameImplementation implements Game{
             initQuestDB();
         }
         else {
-            questDB.setMissionUpdateListener(this::onMissionComplete);
-            questDB.setQuestUpdateListener(this::onQuestComplete);
+            initQuestDBListeners();
         }
     }
 
@@ -97,13 +98,38 @@ public class GameImplementation implements Game{
 
     private void initQuestDB() {
         questDB = new GameQuestDB();
-        questDB.setMissionUpdateListener(this::onMissionComplete);
-        questDB.setQuestUpdateListener(this::onQuestComplete);
+        initQuestDBListeners();
+    }
+
+    private void initQuestDBListeners() {
+        questDB.setQuestUpdateListener(new QuestUpdateListener() {
+            @Override
+            public void onComplete(Quest quest) {
+                onQuestDone(quest);
+            }
+
+            @Override
+            public void onUnComplete(Quest quest) {
+                onQuestUnDone(quest);
+            }
+        });
+        questDB.setMissionUpdateListener(new MissionUpdateListener() {
+            @Override
+            public void onDone(Mission mission) {
+                onMissionDone(mission);
+            }
+
+            @Override
+            public void onUndone(Mission mission) {
+                onMissionUnDone(mission);
+            }
+        });
     }
 
     private void initAvatar() {
         avatar = new GameAvatar(44, 168, "R3dtech");
     }
+
     public void clearData() {
         initQuestDB();
         if (avatar != null) {
@@ -113,12 +139,23 @@ public class GameImplementation implements Game{
         }
     }
 
-    private void onMissionComplete(Mission mission) {
+    private void onMissionDone(Mission mission) {
         avatar.reward(mission.getReward());
         avatarGui.update(avatar);
     }
-    private void onQuestComplete(Quest quest) {
+
+    private void onMissionUnDone(Mission mission) {
+        avatar.undoReward(mission.getReward());
+        avatarGui.update(avatar);
+    }
+
+    private void onQuestDone(Quest quest) {
         avatar.reward(quest.getReward());
+        avatarGui.update(avatar);
+    }
+
+    private void onQuestUnDone(Quest quest) {
+        avatar.undoReward(quest.getReward());
         avatarGui.update(avatar);
     }
 

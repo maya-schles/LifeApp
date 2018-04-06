@@ -7,5 +7,7 @@ import java.time.LocalDate;
 public interface Mission extends Task {
     boolean isComplete(LocalDate date);
     void setDone(LocalDate date);
+    void undoDone(LocalDate date);
     void setUpdateListener(MissionUpdateListener listener);
+    boolean isDoneForDay(LocalDate date);
 }

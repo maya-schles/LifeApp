@@ -14,7 +14,7 @@ public class GameSideQuest extends GameQuest<SideMission> implements SideQuest {
     }
 
     @Override
-    public boolean isDone() {
+    public boolean checkIsDone() {
         for (Mission mission : getMissions()) {
             if (!mission.isComplete(null)) {
                 return false;

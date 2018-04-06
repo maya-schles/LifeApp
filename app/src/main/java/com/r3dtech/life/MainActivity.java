@@ -15,6 +15,7 @@ import android.view.View;
 import com.github.clans.fab.FloatingActionMenu;
 import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.implementation.GameImplementation;
+import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.quests.MainQuest;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
 import com.r3dtech.life.data_loading.SharedPrefsHelper;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //TODO
                 break;
             case R.id.nav_missions:
-                //TODO
+                fragment = ExpandableListViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(LocalDate.now()));
                 break;
             case R.id.nav_stats:
                 fragment = StatsFragment.newInstance(game.getAvatar().getStats());

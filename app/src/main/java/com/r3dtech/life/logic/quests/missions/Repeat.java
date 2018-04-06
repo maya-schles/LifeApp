@@ -7,6 +7,7 @@ public interface Repeat extends Serializable{
     boolean occursOnDay(LocalDate date);
     boolean isComplete(LocalDate date);
     void addOccurance();
+    void removeOccurance();
     boolean[] daysOccurance();
     LocalDate getStartDate();
 }

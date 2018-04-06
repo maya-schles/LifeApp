@@ -60,6 +60,15 @@ public class GameMainMission extends GameMission implements MainMission {
     }
 
     @Override
+    public void undoDone(LocalDate date) {
+        if(isDoneForDay(date)) {
+            repeat.removeOccurance();
+            datesDone.put(date, false);
+            updateListener.onUndone(this);
+        }
+    }
+
+    @Override
     public void dismissForDay(LocalDate date) {
         datesDismissed.put(date, true);
     }

@@ -22,7 +22,17 @@ abstract class GameMission extends GameTask implements Mission {
     }
 
     private void init() {
-        updateListener = (Mission m)->{};
+        updateListener = new MissionUpdateListener() {
+            @Override
+            public void onDone(Mission mission) {
+
+            }
+
+            @Override
+            public void onUndone(Mission mission) {
+
+            }
+        };
     }
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();

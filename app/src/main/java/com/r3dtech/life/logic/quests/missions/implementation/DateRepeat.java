@@ -26,6 +26,11 @@ public class DateRepeat extends MissionRepeat {
 
     }
 
+    @Override
+    public void removeOccurance() {
+
+    }
+
     public LocalDate getEndDate() {
         return endDate;
     }

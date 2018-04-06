@@ -22,7 +22,22 @@ public class GameSideMission extends GameMission implements SideMission {
 
     @Override
     public void setDone(LocalDate date) {
-        isComplete = true;
-        updateListener.onDone(this);
+        if (!isComplete) {
+            isComplete = true;
+            updateListener.onDone(this);
+        }
+    }
+
+    @Override
+    public void undoDone(LocalDate date) {
+        if(isComplete) {
+            isComplete = false;
+            updateListener.onUndone(this);
+        }
+    }
+
+    @Override
+    public boolean isDoneForDay(LocalDate date) {
+        return isComplete;
     }
 }

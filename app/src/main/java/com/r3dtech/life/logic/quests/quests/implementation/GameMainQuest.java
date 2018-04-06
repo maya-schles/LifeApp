@@ -33,7 +33,7 @@ public class GameMainQuest extends GameQuest<MainMission> implements MainQuest {
     }
 
     @Override
-    public boolean isDone() {
+    public boolean checkIsDone() {
         return bossMission.isComplete(null);
     }
 }
