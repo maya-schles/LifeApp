@@ -63,8 +63,8 @@
             android:text="@string/missions_label"
             android:labelFor="@+id/recycler_view"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <ListView
+            android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

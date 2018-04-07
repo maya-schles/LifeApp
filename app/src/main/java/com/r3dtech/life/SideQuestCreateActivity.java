@@ -1,15 +1,14 @@
 package com.r3dtech.life;
 
-import android.support.v7.widget.RecyclerView;
+import android.widget.ArrayAdapter;
 
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.missions.SideMission;
-import com.r3dtech.life.logic.quests.missions.implementation.GameSideMission;
 import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.logic.quests.quests.implementation.GameSideQuest;
-import com.r3dtech.life.ui.adapters.MissionEditAdapter;
-import com.r3dtech.life.ui.adapters.reference_view_holders.MissionEditViewHolder;
+import com.r3dtech.life.ui.adapters.SideMissionAdapter;
+import com.r3dtech.life.ui.dialog.SideMissionCreateDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +25,9 @@ public class SideQuestCreateActivity extends QuestCreateActivity {
     }
 
     @Override
-    Mission newMission() {
-        return new GameSideMission("", "", Task.Difficulty.MEDIUM);
+    void newMissionDialog() {
+        SideMissionCreateDialog dialog = new SideMissionCreateDialog(this, this::addMission);
+        dialog.show();
     }
 
     @Override
@@ -36,8 +36,8 @@ public class SideQuestCreateActivity extends QuestCreateActivity {
     }
 
     @Override
-    RecyclerView.Adapter getMissionAdapter(List<Mission> missionList) {
-        return new MissionEditAdapter<>(convertMissionList(missionList), MissionEditViewHolder.class);
+    ArrayAdapter getMissionAdapter(List<Mission> missionList) {
+        return new SideMissionAdapter(this, convertMissionList(missionList));
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.r3dtech.life;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -10,14 +10,12 @@ import com.r3dtech.life.logic.quests.missions.BossMission;
 import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.missions.implementation.GameBossMission;
-import com.r3dtech.life.logic.quests.missions.implementation.GameMainMission;
-import com.r3dtech.life.logic.quests.missions.implementation.TimesRepeat;
 import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.logic.quests.quests.implementation.GameMainQuest;
 import com.r3dtech.life.ui.Utils;
-import com.r3dtech.life.ui.adapters.MainMissionEditAdapter;
+import com.r3dtech.life.ui.adapters.MainMissionAdapter;
+import com.r3dtech.life.ui.dialog.MainMissionCreateDialog;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +34,9 @@ public class MainQuestCreateActivity extends QuestCreateActivity {
     }
 
     @Override
-    Mission newMission() {
-        return new GameMainMission("", "", Task.Difficulty.MEDIUM, new TimesRepeat(LocalDate.now()));
+    void newMissionDialog() {
+        MainMissionCreateDialog dialog = new MainMissionCreateDialog(this, this::addMission, getSupportFragmentManager());
+        dialog.show();
     }
 
     @Override
@@ -46,8 +45,8 @@ public class MainQuestCreateActivity extends QuestCreateActivity {
     }
 
     @Override
-    RecyclerView.Adapter getMissionAdapter(List<Mission> missionList) {
-        return new MainMissionEditAdapter(convertMissionList(missionList), getSupportFragmentManager());
+    ArrayAdapter getMissionAdapter(List<Mission> missionList) {
+        return new MainMissionAdapter(this, convertMissionList(missionList));
     }
 
     @Override

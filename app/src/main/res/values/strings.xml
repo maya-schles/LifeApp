@@ -23,6 +23,7 @@
     <!-- button texts -->
     <string name="add_mission">Add Mission</string>
     <string name="create_quest">Create Quest</string>
+    <string name="create_mission">Create Mission</string>
 
     <!-- abbreviated days of week -->
     <string name="abbreviated_sunday">SUN</string>
