@@ -1,0 +1,125 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground"
+    android:visibility="visible"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/difficulty"
+        android:textAppearance="@style/Text_Title_2_Style"/>
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/title"
+        android:layout_below="@+id/title"
+        android:textAppearance="@style/Text_Regular_Style"/>
+
+    <TextView
+        android:id="@+id/difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/title"
+        android:layout_alignParentEnd="true"
+        android:textAppearance="@style/Text_Regular_Style"/>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/number"
+        android:columnCount="4"
+        android:orientation="horizontal"
+        android:rowCount="2"
+        android:visibility="visible">
+
+        <CheckBox
+            android:id="@+id/sunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abbreviated_sunday"
+            android:clickable="false"/>
+
+        <CheckBox
+            android:id="@+id/monday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abbreviated_monday"
+            android:clickable="false"/>
+
+        <CheckBox
+            android:id="@+id/tuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abbreviated_tuesday"
+            android:clickable="false"/>
+
+        <CheckBox
+            android:id="@+id/wednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abbreviated_wednesday"
+            android:clickable="false"/>
+
+        <CheckBox
+            android:id="@+id/thursday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abbreviated_thursday"
+            android:clickable="false"/>
+
+        <CheckBox
+            android:id="@+id/friday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abbreviated_friday"
+            android:clickable="false"/>
+
+        <CheckBox
+            android:id="@+id/saturday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/abbreviated_saturday"
+            android:clickable="false"/>
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/description"
+        android:textAppearance="@style/Text_Regular_Style"/>
+
+    <TextView
+        android:id="@+id/end_case"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/start_date"
+        android:layout_alignParentEnd="true"
+        android:textAppearance="@style/Text_Regular_Style"/>
+
+    <TextView
+        android:id="@+id/end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/start_date"
+        android:textAppearance="@style/Text_Regular_Style"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/start_date"
+        android:textAppearance="@style/Text_Regular_Style"
+        android:visibility="visible" />
+</RelativeLayout>

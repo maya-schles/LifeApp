@@ -3,7 +3,6 @@ package com.r3dtech.life;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,7 +24,6 @@ import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.ui.Utils;
 import com.r3dtech.life.ui.adapters.MissionEditAdapter;
 import com.r3dtech.life.ui.misc.SwipeItemTouchHelperCallback;
-import com.r3dtech.life.ui.adapters.reference_view_holders.MissionEditViewHolder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -134,15 +131,6 @@ public abstract class QuestCreateActivity extends AppCompatActivity implements S
         createQuest();
     }
 
-    private List<Mission> updateMissionList() {
-        for (int i = 0; i < missionRecyclerView.getAdapter().getItemCount(); i++) {
-            MissionEditViewHolder viewHolder = (MissionEditViewHolder)
-                    missionRecyclerView.findViewHolderForAdapterPosition(i);
-            viewHolder.updateMission();
-        }
-        return adapter.getMissions();
-    }
-
     abstract Quest createQuest(String title, String description, Task.Difficulty difficulty, List<Mission> missionList);
 
     abstract String getResultTag();
@@ -151,7 +139,7 @@ public abstract class QuestCreateActivity extends AppCompatActivity implements S
         String title = titleEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
         Task.Difficulty difficulty = Task.Difficulty.valueOf(difficultySpinner.getSelectedItem().toString());
-        List<Mission> missionList = updateMissionList();
+        List<Mission> missionList = adapter.getMissions();
 
         finish(createQuest(title, description, difficulty, missionList));
     }

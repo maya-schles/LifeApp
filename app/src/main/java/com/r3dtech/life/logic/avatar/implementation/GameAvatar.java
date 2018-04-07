@@ -114,12 +114,26 @@ public class GameAvatar implements Avatar {
         return level;
     }
 
+    private void updateMaxXP() {
+        if (level <= 15) {
+            maxXP = 4*level+14;
+            return;
+        }
+        if (level <= 30) {
+            maxXP = 10*level-76;
+            return;
+        }
+        maxXP = 18*level-316;
+    }
+
     private void levelUp() {
         level++;
+        updateMaxXP();
     }
 
     private void levelDown() {
         level--;
+        updateMaxXP();
     }
     @Override
     public void damage(int hpToDamage) {

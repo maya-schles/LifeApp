@@ -69,6 +69,22 @@ public class GameQuestDB implements QuestDB {
             }
         };
 
+
+        if (doneSideQuests == null) {
+            doneSideQuests = new ArrayList<>();
+        }
+
+        if (doneMainQuests == null) {
+            doneSideQuests = new ArrayList<>();
+        }
+
+        if (mainQuests == null) {
+            doneSideQuests = new ArrayList<>();
+        }
+
+        if (sideQuests == null) {
+            doneSideQuests = new ArrayList<>();
+        }
         for(Quest quest:sideQuests) {
             quest.setUpdateListener(innerQuestUpdateListener);
             quest.setMissionUpdateListener(innerMissionUpdateListener);

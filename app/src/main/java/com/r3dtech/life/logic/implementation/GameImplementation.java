@@ -50,7 +50,7 @@ public class GameImplementation implements Game{
     @Override
     public void start() {
         clearData();
-        loadGameData();
+        //loadGameData();
         avatarGui.update(avatar);
     }
 
