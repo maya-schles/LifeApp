@@ -46,8 +46,8 @@ public class GameImplementation implements Game{
 
     @Override
     public void start() {
-        clearData();
-        //loadGameData();
+        //clearData();
+        loadGameData();
         gameGuiListener.updateAvatar(avatar);
     }
 
@@ -71,12 +71,12 @@ public class GameImplementation implements Game{
         try {
             loadQuestDB();
         } catch (IOException e) {
-            throw new RuntimeException("Couldn't load quests "+e.getMessage());
+            initQuestDB();
         }
         try {
             loadAvatar();
         } catch (IOException e) {
-            throw new RuntimeException(("Couldn't load avatar "+e.getMessage()));
+            initAvatar();
         }
     }
 

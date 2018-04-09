@@ -7,12 +7,12 @@
         android:id="@+id/boss_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Text_Regular_Style"
+        android:textAppearance="@style/Text_Label_Style"
         android:text="@string/boss_label"/>
 
     <EditText
         android:id="@+id/title"
-        android:textAppearance="@style/Text_Title_2_Style"
+        android:textAppearance="@style/Text_Boss_Mission_Title_Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -30,7 +30,7 @@
 
     <EditText
         android:id="@+id/description"
-        android:textAppearance="@style/Text_Regular_Style"
+        android:textAppearance="@style/Text_Description_Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"

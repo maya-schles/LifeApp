@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Game game;
 
+    private NavigationView navigationView;
+    private int selectedNavID = R.id.nav_missions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         game = new GameImplementation(new SharedPrefsHelper(SHARED_PREF_TAG, this), this);
         game.start();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ((FloatingActionMenu) findViewById(R.id.create_quest_menu)).setClosedOnTouchOutside(true);
@@ -63,6 +66,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStop() {
         super.onStop();
         game.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateFragment();
+    }
+
+    private void updateFragment() {
+        Fragment fragment = getFragmentForNav(selectedNavID);
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flcontent, fragment).commit();
+        }
     }
 
     @Override
@@ -93,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = getFragmentForNav(item.getItemId());
+        selectedNavID = item.getItemId();
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();

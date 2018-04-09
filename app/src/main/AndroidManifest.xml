@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".SideQuestCreateActivity" />
         <activity android:name=".MainQuestCreateActivity" />
-        <activity android:name=".AvatarCreationActivity"></activity>
+        <activity android:name=".AvatarCreationActivity"/>
     </application>
 
 </manifest>

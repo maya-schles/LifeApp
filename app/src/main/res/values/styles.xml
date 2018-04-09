@@ -13,6 +13,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Text Styles -->
     <style name="Text_Info_Style" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
@@ -25,17 +26,30 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-    <style name="Text_Title_1_Style" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorAccent</item>
+    <style name="Text_Title_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
         <item name="android:textSize">30sp</item>
     </style>
 
-    <style name="Text_Title_2_Style" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorThird</item>
+    <style name="Text_Quest_Title_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="Text_Regular_Style" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@android:color/tertiary_text_dark</item>
+    <style name="Text_Mission_Title_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Text_Boss_Mission_Title_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Text_Description_Style" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/tertiary_text_light</item>
+    </style>
+
+    <style name="Text_Label_Style" parent="@android:style/TextAppearance">
     </style>
 </resources>

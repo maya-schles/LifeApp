@@ -20,6 +20,7 @@ public class AvatarCreationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_avatar_creation);
 
         findViews();
+        getSupportActionBar().setTitle("Avatar Creation");
     }
 
     private void findViews() {
