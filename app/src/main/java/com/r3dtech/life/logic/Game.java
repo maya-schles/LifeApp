@@ -1,7 +1,7 @@
 package com.r3dtech.life.logic;
 
 import com.r3dtech.life.logic.avatar.Avatar;
-import com.r3dtech.life.logic.gui.AvatarGui;
+import com.r3dtech.life.logic.gui.GameGuiListener;
 import com.r3dtech.life.logic.quests.QuestDB;
 
 
@@ -14,5 +14,5 @@ public interface Game{
     void stop();
     void start();
 
-    void bindAvatarGui(AvatarGui avatarGui);
+    void setAvatar(Avatar avatar);
 }

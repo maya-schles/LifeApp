@@ -14,10 +14,13 @@ import android.view.View;
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.r3dtech.life.logic.Game;
+import com.r3dtech.life.logic.avatar.Avatar;
+import com.r3dtech.life.logic.gui.GameGuiListener;
 import com.r3dtech.life.logic.implementation.GameImplementation;
 import com.r3dtech.life.logic.quests.quests.MainQuest;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
 import com.r3dtech.life.data_loading.SharedPrefsHelper;
+import com.r3dtech.life.ui.custom_views.CharacterView;
 import com.r3dtech.life.ui.fragments.MainQuestListViewFragment;
 import com.r3dtech.life.ui.fragments.MissionsViewFragment;
 import com.r3dtech.life.ui.fragments.SideQuestListViewFragment;
@@ -27,14 +30,16 @@ import com.r3dtech.life.ui.fragments.StatsFragment;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GameGuiListener{
     private static final String SHARED_PREF_TAG = "life";
 
     public static final String SIDE_QUEST_TAG = "side_quest";
     public static final String MAIN_QUEST_TAG = "main_quest";
+    public static final String AVATAR_TAG = "avatar";
 
     private static final int SIDE_QUEST_CREATE = 1;
-    public static final int MAIN_QUEST_CREATE = 2;
+    private static final int MAIN_QUEST_CREATE = 2;
+    private static final int AVATAR_CREATE = 3;
 
     private Game game;
 
@@ -43,13 +48,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        game = new GameImplementation(new SharedPrefsHelper(SHARED_PREF_TAG, this));
+        game = new GameImplementation(new SharedPrefsHelper(SHARED_PREF_TAG, this), this);
         game.start();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        game.bindAvatarGui(findViewById(R.id.character_view));
         ((FloatingActionMenu) findViewById(R.id.create_quest_menu)).setClosedOnTouchOutside(true);
 
         findViewById(R.id.character_view).invalidate();
@@ -73,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == MAIN_QUEST_CREATE && resultCode == RESULT_OK) {
             MainQuest quest = (MainQuest) data.getSerializableExtra(MAIN_QUEST_TAG);
             game.getQuestDB().addMainQuest(quest);
+        }
+
+        if (requestCode == AVATAR_CREATE && resultCode == RESULT_OK) {
+            Avatar avatar = (Avatar) data.getSerializableExtra(AVATAR_TAG);
+            game.setAvatar(avatar);
         }
     }
 
@@ -144,6 +153,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void newMainQuest() {
         Intent intent = new Intent(this, MainQuestCreateActivity.class);
         startActivityForResult(intent, MAIN_QUEST_CREATE);
+    }
+
+    @Override
+    public void createAvatar() {
+        Intent intent = new Intent(this, AvatarCreationActivity.class);
+        startActivityForResult(intent, AVATAR_CREATE);
+    }
+
+    @Override
+    public void updateAvatar(Avatar avatar) {
+        ((CharacterView) findViewById(R.id.character_view)).update(avatar);
     }
 
     private void closeNewQuestMenu() {

@@ -9,24 +9,22 @@ import com.r3dtech.life.logic.quests.Reward;
 
 public class GameAvatar implements Avatar {
     static final long serialVersionUID = 0L;
+    private static final int MAX_XP_CONST = 3;
     private Stats stats;
     private Inventory inventory;
     private AvatarRepBitmap avatarRep;
-    private double weight;
-    private int height;
     private String name;
 
     private int level = 1;
     private int currHP = DEFAULT_MAX_HP, maxHP = DEFAULT_MAX_HP;
-    private int currXP, maxXP = DEFAULT_MAX_XP;
+    private int currXP, maxXP;
 
-    public GameAvatar(double weight, int height, String name) {
-        this.weight = weight;
-        this.height = height;
+    public GameAvatar(String name) {
         this.name = name;
         stats = GameStats.getZeroInstance();
         inventory = new GameInventory();
         avatarRep = new GameAvatarRepBitmap();
+        updateMaxXP();
     }
 
     @Override
@@ -42,26 +40,6 @@ public class GameAvatar implements Avatar {
     @Override
     public AvatarRepBitmap getAvatarRep() {
         return avatarRep;
-    }
-
-    @Override
-    public double getWeight() {
-        return weight;
-    }
-
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    @Override
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    @Override
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     @Override
@@ -98,8 +76,8 @@ public class GameAvatar implements Avatar {
     public void undoReward(Reward reward) {
         currXP -= reward.getXP();
         while (currXP < 0) {
-            currXP += maxXP;
             levelDown();
+            currXP += maxXP;
         }
         inventory.payMoney(reward.getMoney());
     }
@@ -116,14 +94,15 @@ public class GameAvatar implements Avatar {
 
     private void updateMaxXP() {
         if (level <= 15) {
-            maxXP = 4*level+14;
-            return;
+            maxXP = 2*level+7;
         }
-        if (level <= 30) {
-            maxXP = 10*level-76;
-            return;
+        else if (level <= 30) {
+            maxXP = 5*level-38;
         }
-        maxXP = 18*level-316;
+        else {
+            maxXP = 9*level-158;
+        }
+        maxXP*= MAX_XP_CONST;
     }
 
     private void levelUp() {
@@ -146,4 +125,6 @@ public class GameAvatar implements Avatar {
         currHP += hpToHeal;
         currHP = Math.min(maxHP, currHP);
     }
+
+
 }

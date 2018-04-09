@@ -7,10 +7,10 @@ import android.widget.RelativeLayout;
 
 import com.r3dtech.life.R;
 import com.r3dtech.life.logic.avatar.Avatar;
-import com.r3dtech.life.logic.gui.AvatarGui;
+import com.r3dtech.life.logic.gui.GameGuiListener;
 
 
-public class CharacterView extends RelativeLayout implements AvatarGui{
+public class CharacterView extends RelativeLayout {
     private AvatarDisplayView avatarView;
     private StatBarView hp;
     private StatBarView xp;
@@ -49,7 +49,6 @@ public class CharacterView extends RelativeLayout implements AvatarGui{
         money.setValue(avatar.getInventory().getMoney());
     }
 
-    @Override
     public void update(Avatar avatar) {
         setAvatar(avatar);
         xp.invalidate();
