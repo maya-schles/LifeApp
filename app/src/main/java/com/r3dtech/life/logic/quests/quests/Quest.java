@@ -13,4 +13,6 @@ public interface Quest<T extends Mission> extends Task {
     List<T> getMissions();
     void setUpdateListener(QuestUpdateListener listener);
     void setMissionUpdateListener(MissionUpdateListener listener);
+    int getID();
+    void setID(int id);
 }

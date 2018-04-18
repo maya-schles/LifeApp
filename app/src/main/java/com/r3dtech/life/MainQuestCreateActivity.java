@@ -70,9 +70,4 @@ public class MainQuestCreateActivity extends QuestCreateActivity {
     Quest createQuest(String title, String description, Task.Difficulty difficulty, List<Mission> missionList) {
         return new GameMainQuest(title, description, difficulty, convertMissionList(missionList), getBossMission());
     }
-
-    @Override
-    String getResultTag() {
-        return MainActivity.MAIN_QUEST_TAG;
-    }
 }

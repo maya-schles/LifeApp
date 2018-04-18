@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.AdapterView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
@@ -18,6 +19,8 @@ import java.util.List;
 
 public abstract class ExpandableListViewFragment<T> extends Fragment{
     private List<T> itemList;
+    private ExpandableListView listView;
+    private ExpandableListView.OnGroupClickListener groupClickListener;
 
     public static <T extends ExpandableListViewFragment> ExpandableListViewFragment newInstance(Class<T> implementation, List itemList) {
         try {
@@ -37,8 +40,17 @@ public abstract class ExpandableListViewFragment<T> extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_expandablelistview, container, false);
-        ExpandableListView listView = view.findViewById(R.id.expandable_list_view);
+        listView = view.findViewById(R.id.expandable_list_view);
         listView.setAdapter(getAdapter());
+        listView.setOnItemLongClickListener((AdapterView<?> parent, View v, int position, long id)->{
+            if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+                int groupPosition = ExpandableListView.getPackedPositionGroup(id);
+                    groupClickListener.onGroupClick((ExpandableListView) parent, v, groupPosition, id);
+                return true;
+            }
+
+            return false;
+        });
         ViewStub stub = view.findViewById(R.id.header);
         stub.setLayoutResource(getHeaderLayoutResource());
         initHeader(stub.inflate());
@@ -53,5 +65,9 @@ public abstract class ExpandableListViewFragment<T> extends Fragment{
 
     protected List<T> getItemList() {
         return itemList;
+    }
+
+    public void setOnGroupClickListener(ExpandableListView.OnGroupClickListener clickListener) {
+        groupClickListener = clickListener;
     }
 }

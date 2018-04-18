@@ -14,10 +14,9 @@ import java.util.List;
 
 public interface QuestDB extends Serializable {
     List<MainMission> getMissionsForDate(LocalDate date);
-    void addMainQuest(MainQuest quest);
-    void addSideQuest(SideQuest quest);
-    void dismissMission(MainMission mission, LocalDate date);
-    Quest getParentQuest(Mission mission);
+    void addQuest(Quest quest);
+    void removeQuest(int questID);
+    Quest getQuest(int questID);
     List<MainQuest> getMainQuests();
     List<SideQuest> getSideQuests();
 

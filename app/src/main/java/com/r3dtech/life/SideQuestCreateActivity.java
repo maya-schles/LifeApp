@@ -44,9 +44,4 @@ public class SideQuestCreateActivity extends QuestCreateActivity {
     Quest createQuest(String title, String description, Task.Difficulty difficulty, List<Mission> missionList) {
         return new GameSideQuest(title, description, difficulty, convertMissionList(missionList));
     }
-
-    @Override
-    String getResultTag() {
-        return MainActivity.SIDE_QUEST_TAG;
-    }
 }

@@ -17,10 +17,10 @@ import java.util.List;
 
 public class GameQuestDB implements QuestDB {
     static final long serialVersionUID = 11L;
-    private List<MainQuest> mainQuests = new ArrayList<>();
-    private List<SideQuest> sideQuests = new ArrayList<>();
-    private List<MainQuest> doneMainQuests = new ArrayList<>();
-    private List<SideQuest> doneSideQuests = new ArrayList<>();
+    private static int maxID = 0;
+
+    private List<Quest> quests = new ArrayList<>();
+    private List<Quest> doneQuests = new ArrayList<>();
 
     private transient QuestUpdateListener updateListener;
     private transient QuestUpdateListener innerQuestUpdateListener;
@@ -35,7 +35,7 @@ public class GameQuestDB implements QuestDB {
     public List<MainMission> getMissionsForDate(LocalDate date) {
         List<MainMission> res = new ArrayList<>();
 
-        for (MainQuest quest : mainQuests) {
+        for (MainQuest quest : getMainQuests()) {
             for (MainMission mission : quest.getMissions()) {
                 if (mission.occursOnDay(date) && !mission.isDoneForDay(date)) {
                     res.add(mission);
@@ -70,26 +70,16 @@ public class GameQuestDB implements QuestDB {
         };
 
 
-        if (doneSideQuests == null) {
-            doneSideQuests = new ArrayList<>();
+        if (doneQuests == null) {
+            doneQuests = new ArrayList<>();
         }
 
-        if (doneMainQuests == null) {
-            doneSideQuests = new ArrayList<>();
+        if (quests == null) {
+            quests = new ArrayList<>();
         }
 
-        if (mainQuests == null) {
-            doneSideQuests = new ArrayList<>();
-        }
-
-        if (sideQuests == null) {
-            doneSideQuests = new ArrayList<>();
-        }
-        for(Quest quest:sideQuests) {
-            quest.setUpdateListener(innerQuestUpdateListener);
-            quest.setMissionUpdateListener(innerMissionUpdateListener);
-        }
-        for(Quest quest:mainQuests) {
+        for(Quest quest: quests) {
+            quest.setID(maxID++);
             quest.setUpdateListener(innerQuestUpdateListener);
             quest.setMissionUpdateListener(innerMissionUpdateListener);
         }
@@ -120,56 +110,52 @@ public class GameQuestDB implements QuestDB {
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-
         init();
     }
 
     @Override
-    public void addMainQuest(MainQuest quest) {
-        mainQuests.add(quest);
+    public void addQuest(Quest quest) {
+        quests.add(quest);
+        quest.setID(maxID++);
         quest.setUpdateListener(innerQuestUpdateListener);
         quest.setMissionUpdateListener(innerMissionUpdateListener);
     }
 
     @Override
-    public void addSideQuest(SideQuest quest) {
-        sideQuests.add(quest);
-        quest.setUpdateListener(innerQuestUpdateListener);
-        quest.setMissionUpdateListener(innerMissionUpdateListener);
+    public void removeQuest(int questID) {
+        quests.remove(getQuest(questID));
     }
 
     @Override
-    public Quest getParentQuest(Mission mission) {
-        // Search for parent in main quests
-        for (Quest quest : mainQuests) {
-            if(quest.getMissions().contains(mission)) {
+    public Quest getQuest(int questID) {
+        for (Quest quest: quests) {
+            if (quest.getID() == questID) {
                 return quest;
             }
         }
-
-        // Search for parent in side quests
-        for (Quest quest : sideQuests) {
-            if (quest.getMissions().contains(mission)) {
-                return quest;
-            }
-        }
-
         return null;
     }
 
     @Override
     public List<MainQuest> getMainQuests() {
-        return mainQuests;
+        List<MainQuest> res = new ArrayList<>();
+        for (Quest quest : quests) {
+            if (quest instanceof MainQuest) {
+                res.add((MainQuest) quest);
+            }
+        }
+        return res;
     }
 
     @Override
     public List<SideQuest> getSideQuests() {
-        return sideQuests;
-    }
-    
-    @Override
-    public void dismissMission(MainMission mission, LocalDate date) {
-        mission.dismissForDay(date);
+        List<SideQuest> res = new ArrayList<>();
+        for (Quest quest : quests) {
+            if (quest instanceof SideQuest) {
+                res.add((SideQuest) quest);
+            }
+        }
+        return res;
     }
 
     @Override
@@ -183,26 +169,14 @@ public class GameQuestDB implements QuestDB {
     }
 
     private void onQuestDone(Quest quest) {
-        if (quest instanceof MainQuest) {
-            mainQuests.remove(quest);
-            doneMainQuests.add((MainQuest) quest);
-        }
-        if (quest instanceof SideQuest) {
-            sideQuests.remove(quest);
-            doneSideQuests.add((SideQuest) quest);
-        }
+        quests.remove(quest);
+        doneQuests.add(quest);
         updateListener.onComplete(quest);
     }
 
     private void onQuestUnDone(Quest quest) {
-        if (quest instanceof MainQuest) {
-            mainQuests.add((MainQuest) quest);
-            doneMainQuests.remove(quest);
-        }
-        if (quest instanceof SideQuest) {
-            sideQuests.add((SideQuest) quest);
-            doneSideQuests.remove(quest);
-        }
+        quests.add(quest);
+        doneQuests.remove(quest);
         updateListener.onUnComplete(quest);
     }
 

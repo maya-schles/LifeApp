@@ -3,6 +3,7 @@ package com.r3dtech.life.ui.custom_views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ public class QuestView extends RelativeLayout {
     private TextView titleTextView;
     private TextView descriptionTextView;
     private TextView difficultyTextView;
+    private Quest quest;
 
     public QuestView(Context context) {
         super(context);
@@ -44,5 +46,10 @@ public class QuestView extends RelativeLayout {
         titleTextView.setText(quest.title());
         descriptionTextView.setText(quest.description());
         difficultyTextView.setText(quest.getDifficulty().name());
+        this.quest = quest;
+    }
+
+    public Quest getQuest() {
+        return quest;
     }
 }

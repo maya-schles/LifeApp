@@ -1,5 +1,6 @@
 package com.r3dtech.life.logic.implementation;
 
+import com.r3dtech.life.LifeAppManager;
 import com.r3dtech.life.data_loading.SerializableDataHelper;
 import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.avatar.Avatar;
@@ -23,10 +24,11 @@ public class GameImplementation implements Game{
     private Avatar avatar;
     private SerializableDataHelper dataHelper;
     private transient GameGuiListener gameGuiListener;
+    private LifeAppManager manager;
 
-    public GameImplementation(SerializableDataHelper gameDataHelper, GameGuiListener gameGuiListener) {
+    public GameImplementation(SerializableDataHelper gameDataHelper, LifeAppManager lifeAppManager) {
         dataHelper = gameDataHelper;
-        this.gameGuiListener = gameGuiListener;
+        gameGuiListener = (Avatar avatar)->{};
     }
 
     @Override
@@ -125,7 +127,7 @@ public class GameImplementation implements Game{
 
     private void initAvatar() {
         avatar = new GameAvatar("R3dtech");
-        gameGuiListener.createAvatar();
+        manager.createAvatar();
     }
 
     public void clearData() {
@@ -160,5 +162,11 @@ public class GameImplementation implements Game{
     @Override
     public void setAvatar(Avatar avatar) {
         this.avatar = avatar;
+    }
+
+    @Override
+    public void setGameGui(GameGuiListener gameGuiListener) {
+        this.gameGuiListener = gameGuiListener;
+        gameGuiListener.updateAvatar(avatar);
     }
 }

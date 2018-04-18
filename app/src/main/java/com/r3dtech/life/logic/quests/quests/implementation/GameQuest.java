@@ -13,29 +13,10 @@ import java.util.List;
 public abstract class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
     static final long serialVersionUID = 21L;
 
+    private transient int id = -1;
     private List<T> missionList;
-    private transient QuestUpdateListener updateListener = new QuestUpdateListener() {
-        @Override
-        public void onComplete(Quest quest) {
-
-        }
-
-        @Override
-        public void onUnComplete(Quest quest) {
-
-        }
-    };
-    private transient MissionUpdateListener missionUpdateListener = new MissionUpdateListener() {
-        @Override
-        public void onDone(Mission mission) {
-
-        }
-
-        @Override
-        public void onUndone(Mission mission) {
-
-        }
-    };
+    private transient QuestUpdateListener updateListener;
+    private transient MissionUpdateListener missionUpdateListener;
     private boolean isDone;
 
     GameQuest(String title, String description, Difficulty difficulty, List<T> missionList) {
@@ -58,6 +39,7 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
                 }
             });
         }
+        id = -1;
     }
 
     abstract boolean checkIsDone();
@@ -104,5 +86,13 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
         init();
     }
 
+    @Override
+    public int getID() {
+        return id;
+    }
 
+    @Override
+    public void setID(int id) {
+        this.id = id;
+    }
 }

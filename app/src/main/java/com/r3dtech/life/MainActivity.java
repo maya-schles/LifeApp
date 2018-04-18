@@ -1,6 +1,5 @@
 package com.r3dtech.life;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,52 +8,41 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ExpandableListView;
 
 import com.github.clans.fab.FloatingActionMenu;
 import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.avatar.Avatar;
 import com.r3dtech.life.logic.gui.GameGuiListener;
-import com.r3dtech.life.logic.implementation.GameImplementation;
-import com.r3dtech.life.logic.quests.quests.MainQuest;
-import com.r3dtech.life.logic.quests.quests.SideQuest;
-import com.r3dtech.life.data_loading.SharedPrefsHelper;
 import com.r3dtech.life.ui.custom_views.CharacterView;
+import com.r3dtech.life.ui.custom_views.QuestView;
 import com.r3dtech.life.ui.fragments.MainQuestListViewFragment;
 import com.r3dtech.life.ui.fragments.MissionsViewFragment;
 import com.r3dtech.life.ui.fragments.SideQuestListViewFragment;
 import com.r3dtech.life.ui.fragments.ExpandableListViewFragment;
 import com.r3dtech.life.ui.fragments.StatsFragment;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GameGuiListener{
-    private static final String SHARED_PREF_TAG = "life";
-
-    public static final String SIDE_QUEST_TAG = "side_quest";
-    public static final String MAIN_QUEST_TAG = "main_quest";
-    public static final String AVATAR_TAG = "avatar";
-
-    private static final int SIDE_QUEST_CREATE = 1;
-    private static final int MAIN_QUEST_CREATE = 2;
-    private static final int AVATAR_CREATE = 3;
-
-    private Game game;
-
-    private NavigationView navigationView;
     private int selectedNavID = R.id.nav_missions;
+    private Game game;
+    private LifeAppManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        game = new GameImplementation(new SharedPrefsHelper(SHARED_PREF_TAG, this), this);
-        game.start();
+        manager = ((LifeApplication) getApplication());
+        game = manager.getGame();
+        manager.setGameGUI(this);
 
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ((FloatingActionMenu) findViewById(R.id.create_quest_menu)).setClosedOnTouchOutside(true);
@@ -63,15 +51,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        game.stop();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         updateFragment();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        game.stop();
     }
 
     private void updateFragment() {
@@ -80,31 +68,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.flcontent, fragment).commit();
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == SIDE_QUEST_CREATE && resultCode == RESULT_OK) {
-            SideQuest quest = (SideQuest) data.getSerializableExtra(SIDE_QUEST_TAG);
-            game.getQuestDB().addSideQuest(quest);
-        }
-
-        if (requestCode == MAIN_QUEST_CREATE && resultCode == RESULT_OK) {
-            MainQuest quest = (MainQuest) data.getSerializableExtra(MAIN_QUEST_TAG);
-            game.getQuestDB().addMainQuest(quest);
-        }
-
-        if (requestCode == AVATAR_CREATE && resultCode == RESULT_OK) {
-            Avatar avatar = (Avatar) data.getSerializableExtra(AVATAR_TAG);
-            game.setAvatar(avatar);
-        }
-    }
-
-
-    private void clearGameData() throws IOException {
-        game.clearData();
     }
 
     @Override
@@ -121,14 +84,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private Fragment getFragmentForNav(int id) {
+    private Fragment getFragmentForNav(int navId) {
         Fragment fragment = null;
-        switch (id) {
+        switch (navId) {
             case R.id.nav_side_quests:
                 fragment = ExpandableListViewFragment.newInstance(SideQuestListViewFragment.class, game.getQuestDB().getSideQuests());
+                ((ExpandableListViewFragment) fragment).setOnGroupClickListener(
+                        (ExpandableListView parent, View v, int groupPosition, long id)->{
+                        manager.editSideQuest(((QuestView) v).getQuest().getID());
+                        return false;
+                    });
                 break;
             case R.id.nav_main_quests:
                 fragment = ExpandableListViewFragment.newInstance(MainQuestListViewFragment.class, game.getQuestDB().getMainQuests());
+                ((ExpandableListViewFragment) fragment).setOnGroupClickListener(
+                        (ExpandableListView parent, View v, int groupPosition, long id)->{
+                            Log.d("Clicked on Group", ""+groupPosition);
+                            manager.editMainQuest(((QuestView) v).getQuest().getID());
+                            return true;
+                        });
                 break;
             case R.id.nav_missions:
                 fragment = ExpandableListViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(LocalDate.now()));
@@ -155,28 +129,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void newSideQuestCallback(View v) {
         closeNewQuestMenu();
-        newSideQuest();
-    }
-
-    private void newSideQuest() {
-        Intent intent = new Intent(this, SideQuestCreateActivity.class);
-        startActivityForResult(intent, SIDE_QUEST_CREATE);
+        manager.newSideQuest();
     }
 
     public void newMainQuestCallback(View v) {
         closeNewQuestMenu();
-        newMainQuest();
-    }
-
-    private void newMainQuest() {
-        Intent intent = new Intent(this, MainQuestCreateActivity.class);
-        startActivityForResult(intent, MAIN_QUEST_CREATE);
-    }
-
-    @Override
-    public void createAvatar() {
-        Intent intent = new Intent(this, AvatarCreationActivity.class);
-        startActivityForResult(intent, AVATAR_CREATE);
+        manager.newMainQuest();
     }
 
     @Override

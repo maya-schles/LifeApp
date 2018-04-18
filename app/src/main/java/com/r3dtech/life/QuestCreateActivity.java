@@ -1,9 +1,7 @@
 package com.r3dtech.life;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -18,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.r3dtech.life.data_loading.SerializableDataHelper;
+import com.r3dtech.life.logic.quests.QuestDB;
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.quests.Quest;
@@ -27,6 +26,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.r3dtech.life.LifeAppManager.QUEST_ID_KEY;
+
 
 public abstract class QuestCreateActivity extends AppCompatActivity{
     private EditText titleEditText;
@@ -35,11 +36,16 @@ public abstract class QuestCreateActivity extends AppCompatActivity{
     private ListView missionListView;
     private List<Mission> missions;
     private ArrayAdapter adapter;
+    private int originalQuestID;
+    private QuestDB questDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quest_create);
+
+        questDB = ((LifeApplication) getApplication()).getGame().getQuestDB();
+        originalQuestID = getIntent().getIntExtra(QUEST_ID_KEY, -1);
 
         findViews();
         Utils.populateDifficultySpinner(difficultySpinner, this);
@@ -50,6 +56,13 @@ public abstract class QuestCreateActivity extends AppCompatActivity{
         initExtra(stub.inflate());
 
         missions = new ArrayList<>();
+
+
+        if (originalQuestID != -1) {
+            Quest originalQuest = questDB.getQuest(originalQuestID);
+            missions.addAll(originalQuest.getMissions());
+            updateViews(originalQuest);
+        }
         adapter = getMissionAdapter(missions);
         missionListView.setAdapter(adapter);
     }
@@ -104,6 +117,12 @@ public abstract class QuestCreateActivity extends AppCompatActivity{
         missionListView = findViewById(R.id.list_view);
     }
 
+    private void updateViews(Quest originalQuest) {
+        titleEditText.setText(originalQuest.title());
+        descriptionEditText.setText(originalQuest.description());
+        difficultySpinner.setSelection(originalQuest.getDifficulty().ordinal());
+    }
+
     abstract String getActionBarTitle();
 
     private void changeTitle() {
@@ -128,8 +147,6 @@ public abstract class QuestCreateActivity extends AppCompatActivity{
 
     abstract Quest createQuest(String title, String description, Task.Difficulty difficulty, List<Mission> missionList);
 
-    abstract String getResultTag();
-
     private void createQuest() {
         String title = titleEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
@@ -138,9 +155,8 @@ public abstract class QuestCreateActivity extends AppCompatActivity{
     }
 
     private void finish(Quest quest) {
-        Intent intent = new Intent();
-        intent.putExtra(getResultTag(), quest);
-        setResult(Activity.RESULT_OK, intent);
+        questDB.removeQuest(originalQuestID);
+        questDB.addQuest(quest);
         finish();
     }
 }

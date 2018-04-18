@@ -15,4 +15,5 @@ public interface Game{
     void start();
 
     void setAvatar(Avatar avatar);
+    void setGameGui(GameGuiListener gameGuiListener);
 }
