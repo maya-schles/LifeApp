@@ -60,6 +60,7 @@ public abstract class QuestEditActivity extends AppCompatActivity{
 
 
         if (originalQuestID != -1) {
+            findViewById(R.id.delete_button).setVisibility(View.VISIBLE);
             Quest originalQuest = questDB.getQuest(originalQuestID);
             missions.addAll(originalQuest.getMissions());
             updateViews(originalQuest);
@@ -148,6 +149,10 @@ public abstract class QuestEditActivity extends AppCompatActivity{
 
     abstract Quest createQuest(String title, String description, Task.Difficulty difficulty, List<Mission> missionList);
 
+    public void deleteQuestCallback(View v) {
+        questDB.removeQuest(originalQuestID);
+        finish();
+    }
     private void createQuest() {
         String title = titleEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
