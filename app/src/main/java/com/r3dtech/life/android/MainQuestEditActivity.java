@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainQuestEditActivity extends QuestEditActivity {
-    private static final String ACTION_BAR_TITLE = "Main Quest Creation";
+    private static final String CREATE_ACTION_BAR_TITLE = "Main Quest Creation";
+    private static final String EDIT_ACTION_BAR_TITLE = "Main Quest Edit";
+
     private EditText titleEditText;
     private EditText descriptionEditText;
     private Spinner difficultySpinner;
@@ -42,7 +44,7 @@ public class MainQuestEditActivity extends QuestEditActivity {
 
     @Override
     String getActionBarTitle() {
-        return ACTION_BAR_TITLE;
+        return isEdit()?EDIT_ACTION_BAR_TITLE:CREATE_ACTION_BAR_TITLE;
     }
 
     @Override

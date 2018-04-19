@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SideQuestEditActivity extends QuestEditActivity {
-    private static final String ACTION_BAR_TITLE = "Side Quest Creation";
+    private static final String CREATE_ACTION_BAR_TITLE = "Side Quest Creation";
+    private static final String EDIT_ACTION_BAR_TITLE = "Side Quest Edit";
 
     private List<SideMission> convertMissionList(List<Mission> missionList) {
         List<SideMission> res = new ArrayList<>(missionList.size());
@@ -32,7 +33,7 @@ public class SideQuestEditActivity extends QuestEditActivity {
 
     @Override
     String getActionBarTitle() {
-        return ACTION_BAR_TITLE;
+        return isEdit()?EDIT_ACTION_BAR_TITLE:CREATE_ACTION_BAR_TITLE;
     }
 
     @Override

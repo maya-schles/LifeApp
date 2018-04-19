@@ -160,4 +160,8 @@ public abstract class QuestEditActivity extends AppCompatActivity{
         questDB.addQuest(quest);
         finish();
     }
+
+    public boolean isEdit() {
+        return originalQuestID != -1;
+    }
 }
