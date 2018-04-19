@@ -22,7 +22,7 @@
 
     <!-- button texts -->
     <string name="add_mission">Add Mission</string>
-    <string name="create_quest">Create Quest</string>
+    <string name="confirm">Confirm</string>
     <string name="create_mission">Create Mission</string>
     <string name="create_avatar">Create Avatar</string>
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.r3dtech.life.SideQuestCreateActivity">
+    tools:context="com.r3dtech.life.SideQuestEditActivity">
 
     <EditText
         android:id="@+id/title"
@@ -75,6 +75,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="@string/create_quest"
+        android:text="@string/confirm"
         android:onClick="createQuestCallback"/>
 </RelativeLayout>

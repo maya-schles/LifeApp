@@ -19,7 +19,7 @@ import com.r3dtech.life.ui.dialog.MainMissionCreateDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainQuestCreateActivity extends QuestCreateActivity {
+public class MainQuestEditActivity extends QuestEditActivity {
     private static final String ACTION_BAR_TITLE = "Main Quest Creation";
     private EditText titleEditText;
     private EditText descriptionEditText;

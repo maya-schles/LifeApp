@@ -29,7 +29,7 @@ import java.util.List;
 import static com.r3dtech.life.LifeAppManager.QUEST_ID_KEY;
 
 
-public abstract class QuestCreateActivity extends AppCompatActivity{
+public abstract class QuestEditActivity extends AppCompatActivity{
     private EditText titleEditText;
     private EditText descriptionEditText;
     private Spinner difficultySpinner;
@@ -42,7 +42,7 @@ public abstract class QuestCreateActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quest_create);
+        setContentView(R.layout.activity_quest_edit);
 
         questDB = ((LifeApplication) getApplication()).getGame().getQuestDB();
         originalQuestID = getIntent().getIntExtra(QUEST_ID_KEY, -1);

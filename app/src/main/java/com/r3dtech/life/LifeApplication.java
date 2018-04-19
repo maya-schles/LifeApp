@@ -43,26 +43,26 @@ public class LifeApplication extends Application implements LifeAppManager{
 
     @Override
     public void newSideQuest() {
-        Intent intent = new Intent(this, SideQuestCreateActivity.class);
+        Intent intent = new Intent(this, SideQuestEditActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void editSideQuest(int questID) {
-        Intent intent = new Intent(this, SideQuestCreateActivity.class);
+        Intent intent = new Intent(this, SideQuestEditActivity.class);
         intent.putExtra(QUEST_ID_KEY, questID);
         startActivity(intent);
     }
 
     @Override
     public void newMainQuest() {
-        Intent intent = new Intent(this, MainQuestCreateActivity.class);
+        Intent intent = new Intent(this, MainQuestEditActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void editMainQuest(int questID) {
-        Intent intent = new Intent(this, MainQuestCreateActivity.class);
+        Intent intent = new Intent(this, MainQuestEditActivity.class);
         intent.putExtra(QUEST_ID_KEY, questID);
         startActivity(intent);
     }

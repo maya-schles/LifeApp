@@ -13,7 +13,7 @@ import com.r3dtech.life.ui.dialog.SideMissionCreateDialog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SideQuestCreateActivity extends QuestCreateActivity {
+public class SideQuestEditActivity extends QuestEditActivity {
     private static final String ACTION_BAR_TITLE = "Side Quest Creation";
 
     private List<SideMission> convertMissionList(List<Mission> missionList) {
