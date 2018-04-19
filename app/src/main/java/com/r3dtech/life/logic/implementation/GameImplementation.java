@@ -1,6 +1,6 @@
 package com.r3dtech.life.logic.implementation;
 
-import com.r3dtech.life.LifeAppManager;
+import com.r3dtech.life.logic.LifeAppManager;
 import com.r3dtech.life.data_loading.SerializableDataHelper;
 import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.avatar.Avatar;

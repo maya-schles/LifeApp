@@ -1,10 +1,11 @@
-package com.r3dtech.life;
+package com.r3dtech.life.android;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.BossMission;
 import com.r3dtech.life.logic.quests.missions.MainMission;

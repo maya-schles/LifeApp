@@ -1,4 +1,4 @@
-package com.r3dtech.life;
+package com.r3dtech.life.android;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.r3dtech.life.R;
 import com.r3dtech.life.data_loading.SerializableDataHelper;
 import com.r3dtech.life.logic.quests.QuestDB;
 import com.r3dtech.life.logic.quests.Task;
@@ -26,7 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.r3dtech.life.LifeAppManager.QUEST_ID_KEY;
+import static com.r3dtech.life.logic.LifeAppManager.QUEST_ID_KEY;
 
 
 public abstract class QuestEditActivity extends AppCompatActivity{

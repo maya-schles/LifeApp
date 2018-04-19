@@ -1,10 +1,12 @@
-package com.r3dtech.life;
+package com.r3dtech.life.android;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.r3dtech.life.R;
+import com.r3dtech.life.logic.LifeAppManager;
 import com.r3dtech.life.logic.avatar.Avatar;
 import com.r3dtech.life.logic.avatar.implementation.GameAvatar;
 

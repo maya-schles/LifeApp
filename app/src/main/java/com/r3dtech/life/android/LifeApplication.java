@@ -1,17 +1,18 @@
-package com.r3dtech.life;
+package com.r3dtech.life.android;
 
 import android.app.Application;
 import android.content.Intent;
 
 import com.r3dtech.life.data_loading.SharedPrefsHelper;
 import com.r3dtech.life.logic.Game;
+import com.r3dtech.life.logic.LifeAppManager;
 import com.r3dtech.life.logic.gui.GameGuiListener;
 import com.r3dtech.life.logic.implementation.GameImplementation;
 
 import java.io.IOException;
 
 
-public class LifeApplication extends Application implements LifeAppManager{
+public class LifeApplication extends Application implements LifeAppManager {
     private Game game;
 
     @Override

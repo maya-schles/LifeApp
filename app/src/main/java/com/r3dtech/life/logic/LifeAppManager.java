@@ -1,6 +1,5 @@
-package com.r3dtech.life;
+package com.r3dtech.life.logic;
 
-import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.gui.GameGuiListener;
 
 import java.io.IOException;

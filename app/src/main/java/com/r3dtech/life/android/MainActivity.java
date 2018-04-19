@@ -1,4 +1,4 @@
-package com.r3dtech.life;
+package com.r3dtech.life.android;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.github.clans.fab.FloatingActionMenu;
+import com.r3dtech.life.R;
 import com.r3dtech.life.logic.Game;
+import com.r3dtech.life.logic.LifeAppManager;
 import com.r3dtech.life.logic.avatar.Avatar;
 import com.r3dtech.life.logic.gui.GameGuiListener;
 import com.r3dtech.life.ui.custom_views.CharacterView;

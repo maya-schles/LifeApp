@@ -1,4 +1,4 @@
-package com.r3dtech.life;
+package com.r3dtech.life.android;
 
 import android.widget.ArrayAdapter;
 
