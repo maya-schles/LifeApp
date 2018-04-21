@@ -12,6 +12,7 @@ import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.implementation.DateRepeat;
 import com.r3dtech.life.logic.quests.missions.implementation.TimesRepeat;
 
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -21,7 +22,7 @@ public class MainMissionView extends MissionView{
     private TextView endCaseTextView, repTimesTextView;
     private CheckBox[] days = new CheckBox[7];
 
-    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA);
 
     public MainMissionView(Context context) {
         super(context);
