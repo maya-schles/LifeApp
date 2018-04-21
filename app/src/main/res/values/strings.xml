@@ -21,10 +21,11 @@
     <string name="boss_description_hint">Boss Description</string>
 
     <!-- button texts -->
-    <string name="confirm_mission">Confirm Mission</string>
+    <string name="add_mission">Add Mission</string>
     <string name="delete_quest">Delete Quest</string>
     <string name="confirm_quest">Confirm Quest</string>
-    <string name="create_mission">Create Mission</string>
+    <string name="delete_mission">Delete Mission</string>
+    <string name="confirm_mission">Confirm Mission</string>
     <string name="create_avatar">Create Avatar</string>
 
     <!-- abbreviated days of week -->

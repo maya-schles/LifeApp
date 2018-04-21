@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -42,10 +43,13 @@ public abstract class CreateMissionDialog<T extends Mission> extends Dialog {
         titleEditText.setText(mission.title());
         descriptionEditText.setText(mission.description());
         difficultySpinner.setSelection(mission.getDifficulty().ordinal());
+        Button deleteButton = findViewById(R.id.delete_button);
+        deleteButton.setVisibility(View.VISIBLE);
+        deleteButton.setOnClickListener(this::deleteCallback);
     }
     void init() {
         findViews();
-        findViewById(R.id.create_mission_button).setOnClickListener(this::createMissionCallback);
+        findViewById(R.id.confirm_mission_button).setOnClickListener(this::createMissionCallback);
         Utils.populateDifficultySpinner(difficultySpinner, getContext());
         setTitle(mission == null?CREATE_TITLE:EDIT_TITLE);
         if (mission != null) {
@@ -58,6 +62,10 @@ public abstract class CreateMissionDialog<T extends Mission> extends Dialog {
         dismiss();
     }
 
+    private void deleteCallback(View v) {
+        callback.onMissionCreated(mission, null);
+        dismiss();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

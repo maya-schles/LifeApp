@@ -150,9 +150,10 @@ public abstract class QuestEditActivity extends AppCompatActivity{
             missions.remove(originalMission);
             adapter.remove(originalMission);
         }
-        missions.add(newMission);
-        adapter.add(newMission);
-
+        if (newMission != null) {
+            missions.add(newMission);
+            adapter.add(newMission);
+        }
     }
 
 
