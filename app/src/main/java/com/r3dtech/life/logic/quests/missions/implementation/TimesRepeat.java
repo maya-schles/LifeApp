@@ -1,28 +1,29 @@
 package com.r3dtech.life.logic.quests.missions.implementation;
 
-import java.time.LocalDate;
+
+import com.r3dtech.life.logic.quests.GameDate;
 
 public class TimesRepeat extends MissionRepeat {
     static final long serialVersionUID = 19L;
     private static final int DEFAULT_REP_TIMES = 66;
     private int repeatTimes, currTimes;
 
-    public TimesRepeat(LocalDate startDate) {
+    public TimesRepeat(GameDate startDate) {
         this(startDate, DEFAULT_REP_TIMES);
     }
 
-    public TimesRepeat(LocalDate startDate, int repeatTimes) {
+    public TimesRepeat(GameDate startDate, int repeatTimes) {
         super(startDate);
         this.repeatTimes = repeatTimes;
     }
 
-    public TimesRepeat(boolean[] daysOfWeek, LocalDate startDate, int repeatTimes) {
+    public TimesRepeat(boolean[] daysOfWeek, GameDate startDate, int repeatTimes) {
         super(daysOfWeek, startDate);
         this.repeatTimes = repeatTimes;
     }
 
     @Override
-    public boolean isComplete(LocalDate date) {
+    public boolean isComplete(GameDate date) {
         return currTimes >= repeatTimes;
     }
 

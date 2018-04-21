@@ -3,9 +3,10 @@ package com.r3dtech.life.logic.quests.missions;
 
 import android.support.annotation.Nullable;
 
-import java.time.LocalDate;
+import com.r3dtech.life.logic.quests.GameDate;
+
 
 public interface SideMission extends Mission {
     @Override
-    boolean isComplete(@Nullable LocalDate date);
+    boolean isComplete(@Nullable GameDate date);
 }

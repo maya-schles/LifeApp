@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.r3dtech.life.R;
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
@@ -22,7 +23,7 @@ import com.r3dtech.life.logic.quests.missions.implementation.GameMainMission;
 import com.r3dtech.life.logic.quests.missions.implementation.TimesRepeat;
 import com.r3dtech.life.ui.fragments.DatePickerFragment;
 
-import java.time.LocalDate;
+import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -31,7 +32,6 @@ public class MainMissionCreateDialog extends CreateMissionDialog<MainMission>{
     private CheckBox[] days = new CheckBox[7];
     private TextView startDateTextView, endDateTextView;
     private EditText repTimesEditText;
-    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private FragmentManager fragmentManager;
 
     public MainMissionCreateDialog(@NonNull Context context, EditMissionCallback callback, FragmentManager fragmentManager, MainMission mission) {
@@ -57,7 +57,7 @@ public class MainMissionCreateDialog extends CreateMissionDialog<MainMission>{
     }
 
     private void updateViews() {
-        startDateTextView.setText(dateFormat.format(mission.getRepeat().getStartDate()));
+        startDateTextView.setText(mission.getRepeat().getStartDate().toString());
 
         for (int i = 0; i < days.length; i++) {
             days[i].setChecked(mission.getRepeat().daysOccurance()[i]);
@@ -66,7 +66,7 @@ public class MainMissionCreateDialog extends CreateMissionDialog<MainMission>{
         if (mission.getRepeat() instanceof DateRepeat) {
             repTimesEditText.setVisibility(View.GONE);
             endDateTextView.setVisibility(View.VISIBLE);
-            endDateTextView.setText(dateFormat.format(((DateRepeat) mission.getRepeat()).getEndDate()));
+            endDateTextView.setText(((DateRepeat) mission.getRepeat()).getEndDate().toString());
             endCaseSpinner.setSelection(0);
         }
         else if (mission.getRepeat() instanceof TimesRepeat) {
@@ -83,8 +83,8 @@ public class MainMissionCreateDialog extends CreateMissionDialog<MainMission>{
         findViews();
 
         // timing dates
-        endDateTextView.setText(dateFormat.format(LocalDate.now()));
-        startDateTextView.setText(dateFormat.format(LocalDate.now()));
+        endDateTextView.setText(GameDate.now().toString());
+        startDateTextView.setText(GameDate.now().toString());
 
         populatEndCaseSpinner();
         setDatePickers();
@@ -105,17 +105,21 @@ public class MainMissionCreateDialog extends CreateMissionDialog<MainMission>{
         for (int i = 0; i < daysOfWeek.length; i++) {
             daysOfWeek[i] = days[i].isChecked();
         }
-        LocalDate startDate = LocalDate.parse(startDateTextView.getText(), dateFormat);
+        try {
+            GameDate startDate = GameDate.parse(startDateTextView.getText().toString());
 
-        switch (endCaseSpinner.getSelectedItemPosition()) {
-            case 0:
-                LocalDate endDate = LocalDate.parse(endDateTextView.getText(), dateFormat);
-                return new DateRepeat(daysOfWeek, startDate, endDate);
-            case 1:
-                return new TimesRepeat(daysOfWeek, startDate,
-                        Integer.parseInt(repTimesEditText.getText().toString()));
+            switch (endCaseSpinner.getSelectedItemPosition()) {
+                case 0:
+                    GameDate endDate = GameDate.parse(endDateTextView.getText().toString());
+                    return new DateRepeat(daysOfWeek, startDate, endDate);
+                case 1:
+                    return new TimesRepeat(daysOfWeek, startDate,
+                            Integer.parseInt(repTimesEditText.getText().toString()));
+            }
+            return null;
+        } catch (ParseException e) {
+            return null;
         }
-        return null;
     }
 
     @Override

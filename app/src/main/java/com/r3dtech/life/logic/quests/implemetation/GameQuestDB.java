@@ -1,5 +1,6 @@
 package com.r3dtech.life.logic.quests.implemetation;
 
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.missions.MissionUpdateListener;
@@ -11,7 +12,6 @@ import com.r3dtech.life.logic.quests.quests.SideQuest;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class GameQuestDB implements QuestDB {
     }
 
     @Override
-    public List<MainMission> getMissionsForDate(LocalDate date) {
+    public List<MainMission> getMissionsForDate(GameDate date) {
         List<MainMission> res = new ArrayList<>();
 
         for (MainQuest quest : getMainQuests()) {

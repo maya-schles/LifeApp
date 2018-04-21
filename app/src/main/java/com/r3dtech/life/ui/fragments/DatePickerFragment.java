@@ -14,8 +14,8 @@ import java.util.Locale;
 
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-    TextView dateText;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA);
+    private TextView dateText;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA);
 
     public void setDateText(TextView dateText) {
         this.dateText = dateText;

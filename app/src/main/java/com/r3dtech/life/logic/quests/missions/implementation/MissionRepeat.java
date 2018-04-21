@@ -1,26 +1,26 @@
 package com.r3dtech.life.logic.quests.missions.implementation;
 
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.logic.quests.missions.Repeat;
 
-import java.time.LocalDate;
 
 abstract class MissionRepeat implements Repeat{
     static final long serialVersionUID = 18L;
     private boolean[] daysOfWeek;
-    private LocalDate startDate;
+    private GameDate startDate;
 
-    MissionRepeat(LocalDate startDate) {
+    MissionRepeat(GameDate startDate) {
         this(new boolean[] {true, true, true, true, true, true, true}, startDate);
     }
 
-    MissionRepeat(boolean[] daysOfWeek, LocalDate startDate) {
+    MissionRepeat(boolean[] daysOfWeek, GameDate startDate) {
         this.daysOfWeek = daysOfWeek;
         this.startDate = startDate;
     }
 
     @Override
-    public boolean occursOnDay(LocalDate date) {
-        return !date.isBefore(startDate)&&daysOfWeek[date.getDayOfWeek().getValue()%7];
+    public boolean occursOnDay(GameDate date) {
+        return !date.isBefore(startDate)&&daysOfWeek[date.getDayOfWeek()];
     }
 
     @Override
@@ -29,7 +29,7 @@ abstract class MissionRepeat implements Repeat{
     }
 
     @Override
-    public LocalDate getStartDate() {
+    public GameDate getStartDate() {
         return startDate;
     }
 }

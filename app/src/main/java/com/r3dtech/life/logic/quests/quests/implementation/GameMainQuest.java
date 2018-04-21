@@ -1,11 +1,11 @@
 package com.r3dtech.life.logic.quests.quests.implementation;
 
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.logic.quests.missions.BossMission;
 import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.quests.MainQuest;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class GameMainQuest extends GameQuest<MainMission> implements MainQuest {
@@ -23,7 +23,7 @@ public class GameMainQuest extends GameQuest<MainMission> implements MainQuest {
     }
 
     @Override
-    public boolean isBossReady(LocalDate date) {
+    public boolean isBossReady(GameDate date) {
         for (Mission mission : getMissions()) {
             if (!mission.isComplete(date)) {
                 return false;

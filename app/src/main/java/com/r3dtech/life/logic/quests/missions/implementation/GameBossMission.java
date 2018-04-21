@@ -2,9 +2,9 @@ package com.r3dtech.life.logic.quests.missions.implementation;
 
 import android.support.annotation.Nullable;
 
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.logic.quests.missions.BossMission;
 
-import java.time.LocalDate;
 
 public class GameBossMission extends GameMission implements BossMission {
     static final long serialVersionUID = 23L;
@@ -15,12 +15,12 @@ public class GameBossMission extends GameMission implements BossMission {
     }
 
     @Override
-    public boolean isComplete(@Nullable LocalDate date) {
+    public boolean isComplete(@Nullable GameDate date) {
         return isComplete;
     }
 
     @Override
-    public void setDone(LocalDate date) {
+    public void setDone(GameDate date) {
         if (!isComplete) {
             isComplete = true;
             updateListener.onDone(this);
@@ -28,7 +28,7 @@ public class GameBossMission extends GameMission implements BossMission {
     }
 
     @Override
-    public void undoDone(LocalDate date) {
+    public void undoDone(GameDate date) {
         if(isComplete) {
             isComplete = false;
             updateListener.onUndone(this);
@@ -36,7 +36,7 @@ public class GameBossMission extends GameMission implements BossMission {
     }
 
     @Override
-    public boolean isDoneForDay(LocalDate date) {
+    public boolean isDoneForDay(GameDate date) {
         return isComplete;
     }
 }

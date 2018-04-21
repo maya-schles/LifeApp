@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.CheckBox;
 
 import com.r3dtech.life.R;
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.logic.quests.missions.Mission;
 
-import java.time.LocalDate;
 
 public class DoableMissionView extends MissionView {
     private CheckBox checkBox;
@@ -39,10 +39,10 @@ public class DoableMissionView extends MissionView {
         findViews();
         checkBox.setOnClickListener((View v) -> {
                 if (checkBox.isChecked()) {
-                    mission.setDone(LocalDate.now());
+                    mission.setDone(GameDate.now());
                 }
                 else {
-                    mission.undoDone(LocalDate.now());
+                    mission.undoDone(GameDate.now());
                 }
         });
     }
@@ -53,7 +53,7 @@ public class DoableMissionView extends MissionView {
 
     public void setMission(Mission mission) {
         super.setMission(mission);
-        checkBox.setChecked(mission.isDoneForDay(LocalDate.now()));
+        checkBox.setChecked(mission.isDoneForDay(GameDate.now()));
         this.mission = mission;
     }
 }

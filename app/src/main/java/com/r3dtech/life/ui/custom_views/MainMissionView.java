@@ -65,7 +65,7 @@ public class MainMissionView extends MissionView{
 
     public void setMission(MainMission mission) {
         super.setMission(mission);
-        startDateTextView.setText(dateFormat.format(mission.getRepeat().getStartDate()));
+        startDateTextView.setText(mission.getRepeat().getStartDate().toString());
 
         for (int i = 0; i < days.length; i++) {
             days[i].setChecked(mission.getRepeat().daysOccurance()[i]);
@@ -74,7 +74,7 @@ public class MainMissionView extends MissionView{
         if (mission.getRepeat() instanceof DateRepeat) {
             repTimesTextView.setVisibility(View.GONE);
             endDateTextView.setVisibility(View.VISIBLE);
-            endDateTextView.setText(dateFormat.format(((DateRepeat) mission.getRepeat()).getEndDate()));
+            endDateTextView.setText(((DateRepeat) mission.getRepeat()).getEndDate().toString());
             endCaseTextView.setText("date range");
         }
         else if (mission.getRepeat() instanceof TimesRepeat) {

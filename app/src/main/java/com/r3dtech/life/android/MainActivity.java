@@ -19,6 +19,7 @@ import com.r3dtech.life.logic.Game;
 import com.r3dtech.life.logic.LifeAppManager;
 import com.r3dtech.life.logic.avatar.Avatar;
 import com.r3dtech.life.logic.gui.GameGuiListener;
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.ui.custom_views.CharacterView;
 import com.r3dtech.life.ui.custom_views.QuestView;
 import com.r3dtech.life.ui.fragments.MainQuestListViewFragment;
@@ -27,7 +28,6 @@ import com.r3dtech.life.ui.fragments.SideQuestListViewFragment;
 import com.r3dtech.life.ui.fragments.ExpandableListViewFragment;
 import com.r3dtech.life.ui.fragments.StatsFragment;
 
-import java.time.LocalDate;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, GameGuiListener{
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         });
                 break;
             case R.id.nav_missions:
-                fragment = ExpandableListViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(LocalDate.now()));
+                fragment = ExpandableListViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(GameDate.now()));
                 break;
             case R.id.nav_stats:
                 fragment = StatsFragment.newInstance(game.getAvatar().getStats());

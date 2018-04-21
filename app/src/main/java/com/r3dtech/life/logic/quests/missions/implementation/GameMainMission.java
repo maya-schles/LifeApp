@@ -1,9 +1,9 @@
 package com.r3dtech.life.logic.quests.missions.implementation;
 
+import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Repeat;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,8 +11,7 @@ import java.util.Map;
 public class GameMainMission extends GameMission implements MainMission {
     static final long serialVersionUID = 15L;
     private Repeat repeat;
-    private Map<LocalDate, Boolean> datesDone = new HashMap<>();
-    private Map<LocalDate, Boolean> datesDismissed = new HashMap<>();
+    private Map<GameDate, Boolean> datesDone = new HashMap<>();
 
     public GameMainMission(String title, String description, Difficulty difficulty, Repeat repeat) {
         super(title, description, difficulty);
@@ -25,17 +24,17 @@ public class GameMainMission extends GameMission implements MainMission {
     }
 
     @Override
-    public boolean occursOnDay(LocalDate date) {
-        return repeat.occursOnDay(date) && !isDismissedForDay(date);
+    public boolean occursOnDay(GameDate date) {
+        return repeat.occursOnDay(date);
     }
 
     @Override
-    public boolean isComplete(LocalDate date) {
+    public boolean isComplete(GameDate date) {
         return repeat.isComplete(date);
     }
 
     @Override
-    public boolean isDoneForDay(LocalDate date) {
+    public boolean isDoneForDay(GameDate date) {
         if (datesDone.get(date) == null) {
             return false;
         }
@@ -43,15 +42,7 @@ public class GameMainMission extends GameMission implements MainMission {
     }
 
     @Override
-    public boolean isDismissedForDay(LocalDate date) {
-        if (datesDismissed.get(date) == null) {
-            return false;
-        }
-        return datesDone.get(date);
-    }
-
-    @Override
-    public void setDone(LocalDate date) {
+    public void setDone(GameDate date) {
         if (!isDoneForDay(date)) {
             repeat.addOccurance();
             datesDone.put(date, true);
@@ -60,17 +51,12 @@ public class GameMainMission extends GameMission implements MainMission {
     }
 
     @Override
-    public void undoDone(LocalDate date) {
+    public void undoDone(GameDate date) {
         if(isDoneForDay(date)) {
             repeat.removeOccurance();
             datesDone.put(date, false);
             updateListener.onUndone(this);
         }
-    }
-
-    @Override
-    public void dismissForDay(LocalDate date) {
-        datesDismissed.put(date, true);
     }
 
     @Override
