@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/description"
         android:layout_alignParentEnd="true"
-        android:text="@string/add_mission"
+        android:text="@string/confirm_mission"
         android:onClick="addMissionCallback"/>
 
     <LinearLayout

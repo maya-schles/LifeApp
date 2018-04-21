@@ -3,10 +3,8 @@ package com.r3dtech.life.ui.custom_views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.r3dtech.life.R;
@@ -18,8 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 
-public class MainMissionView extends RelativeLayout{
-    private TextView titleTextView, descriptionTextView, difficultyTextView;
+public class MainMissionView extends MissionView{
     private TextView startDateTextView, endDateTextView;
     private TextView endCaseTextView, repTimesTextView;
     private CheckBox[] days = new CheckBox[7];
@@ -41,15 +38,16 @@ public class MainMissionView extends RelativeLayout{
         init();
     }
 
+    @Override
+    int getLayout() {
+        return R.layout.view_main_mission;
+    }
+
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.view_main_mission, this, true);
         findViews();
     }
 
     private void findViews() {
-        titleTextView = findViewById(R.id.title);
-        descriptionTextView = findViewById(R.id.description);
-        difficultyTextView = findViewById(R.id.difficulty);
         endCaseTextView = findViewById(R.id.end_case);
 
         days[0] = findViewById(R.id.sunday);
@@ -66,10 +64,7 @@ public class MainMissionView extends RelativeLayout{
     }
 
     public void setMission(MainMission mission) {
-        titleTextView.setText(mission.title());
-        descriptionTextView.setText(mission.description());
-        difficultyTextView.setText(mission.getDifficulty().name());
-
+        super.setMission(mission);
         startDateTextView.setText(dateFormat.format(mission.getRepeat().getStartDate()));
 
         for (int i = 0; i < days.length; i++) {

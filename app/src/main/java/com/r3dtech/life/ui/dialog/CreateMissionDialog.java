@@ -13,16 +13,20 @@ import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.ui.Utils;
 
-public abstract class CreateMissionDialog extends Dialog {
+public abstract class CreateMissionDialog<T extends Mission> extends Dialog {
+    private static final String CREATE_TITLE = "Create a mission";
+    private static final String EDIT_TITLE = "Edit mission";
     EditText titleEditText;
     EditText descriptionEditText;
     Spinner difficultySpinner;
+    T mission;
 
-    private CreateMissionCallback callback;
+    private EditMissionCallback callback;
 
-    CreateMissionDialog(@NonNull Context context, CreateMissionCallback callback) {
+    CreateMissionDialog(@NonNull Context context, EditMissionCallback callback, T mission) {
         super(context, android.R.style.Theme_Material_Light_Dialog_Alert);
         this.callback = callback;
+        this.mission = mission;
     }
 
     abstract int getLayout();
@@ -34,15 +38,23 @@ public abstract class CreateMissionDialog extends Dialog {
         difficultySpinner = findViewById(R.id.difficulty_spinner);
     }
 
+    private void updateViews() {
+        titleEditText.setText(mission.title());
+        descriptionEditText.setText(mission.description());
+        difficultySpinner.setSelection(mission.getDifficulty().ordinal());
+    }
     void init() {
         findViews();
         findViewById(R.id.create_mission_button).setOnClickListener(this::createMissionCallback);
         Utils.populateDifficultySpinner(difficultySpinner, getContext());
-        setTitle("Add a mission");
+        setTitle(mission == null?CREATE_TITLE:EDIT_TITLE);
+        if (mission != null) {
+            updateViews();
+        }
     }
 
     private void createMissionCallback(View v) {
-        callback.onMissionCreated(createMission());
+        callback.onMissionCreated(mission, createMission());
         dismiss();
     }
 

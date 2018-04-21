@@ -38,7 +38,13 @@ public class MainQuestEditActivity extends QuestEditActivity {
 
     @Override
     void newMissionDialog() {
-        MainMissionCreateDialog dialog = new MainMissionCreateDialog(this, this::addMission, getSupportFragmentManager());
+        MainMissionCreateDialog dialog = new MainMissionCreateDialog(this, this::addMission, getSupportFragmentManager(), null);
+        dialog.show();
+    }
+
+    @Override
+    void editMissionDialog(Mission mission) {
+        MainMissionCreateDialog dialog = new MainMissionCreateDialog(this, this::addMission, getSupportFragmentManager(),(MainMission) mission);
         dialog.show();
     }
 

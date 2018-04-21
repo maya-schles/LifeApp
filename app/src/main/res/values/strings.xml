@@ -21,7 +21,7 @@
     <string name="boss_description_hint">Boss Description</string>
 
     <!-- button texts -->
-    <string name="add_mission">Add Mission</string>
+    <string name="confirm_mission">Confirm Mission</string>
     <string name="delete_quest">Delete Quest</string>
     <string name="confirm_quest">Confirm Quest</string>
     <string name="create_mission">Create Mission</string>

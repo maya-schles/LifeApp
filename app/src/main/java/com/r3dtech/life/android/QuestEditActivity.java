@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.quests.Quest;
 import com.r3dtech.life.ui.Utils;
+import com.r3dtech.life.ui.custom_views.MissionView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +69,10 @@ public abstract class QuestEditActivity extends AppCompatActivity{
         }
         adapter = getMissionAdapter(missions);
         missionListView.setAdapter(adapter);
+        missionListView.setOnItemLongClickListener((AdapterView<?> parent, View view, int position, long id)->{
+                editMissionDialog(((MissionView) view).getMission());
+                return false;
+            });
     }
 
     @Override
@@ -112,6 +118,8 @@ public abstract class QuestEditActivity extends AppCompatActivity{
 
     abstract void newMissionDialog();
 
+    abstract void editMissionDialog(Mission mission);
+
     private void findViews() {
         titleEditText = findViewById(R.id.title);
         descriptionEditText = findViewById(R.id.description);
@@ -137,11 +145,16 @@ public abstract class QuestEditActivity extends AppCompatActivity{
         newMissionDialog();
     }
 
-    void addMission(Mission mission) {
-        missions.add(mission);
-        adapter.add(mission);
+    void addMission(Mission originalMission, Mission newMission) {
+        if (originalMission != null) {
+            missions.remove(originalMission);
+            adapter.remove(originalMission);
+        }
+        missions.add(newMission);
+        adapter.add(newMission);
 
     }
+
 
     public void createQuestCallback(View v) {
         createQuest();
@@ -153,6 +166,7 @@ public abstract class QuestEditActivity extends AppCompatActivity{
         questDB.removeQuest(originalQuestID);
         finish();
     }
+
     private void createQuest() {
         String title = titleEditText.getText().toString();
         String description = descriptionEditText.getText().toString();

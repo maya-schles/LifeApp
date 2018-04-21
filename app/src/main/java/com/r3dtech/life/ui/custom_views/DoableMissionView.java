@@ -3,21 +3,15 @@ package com.r3dtech.life.ui.custom_views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.missions.Mission;
 
 import java.time.LocalDate;
 
-public class DoableMissionView extends RelativeLayout {
-    private TextView titleTextView;
-    private TextView descriptionTextView;
-    private TextView difficultyTextView;
+public class DoableMissionView extends MissionView {
     private CheckBox checkBox;
     private Mission mission;
 
@@ -36,8 +30,12 @@ public class DoableMissionView extends RelativeLayout {
         init();
     }
 
+    @Override
+    int getLayout() {
+        return R.layout.view_mission_doable;
+    }
+
     private void init() {
-        LayoutInflater.from(getContext()).inflate(R.layout.view_mission_doable, this, true);
         findViews();
         checkBox.setOnClickListener((View v) -> {
                 if (checkBox.isChecked()) {
@@ -50,16 +48,11 @@ public class DoableMissionView extends RelativeLayout {
     }
 
     private void findViews() {
-        titleTextView = findViewById(R.id.title);
-        descriptionTextView = findViewById(R.id.description);
-        difficultyTextView = findViewById(R.id.difficulty);
         checkBox = findViewById(R.id.checkbox);
     }
 
     public void setMission(Mission mission) {
-        titleTextView.setText(mission.title());
-        descriptionTextView.setText(mission.description());
-        difficultyTextView.setText(mission.getDifficulty().name());
+        super.setMission(mission);
         checkBox.setChecked(mission.isDoneForDay(LocalDate.now()));
         this.mission = mission;
     }

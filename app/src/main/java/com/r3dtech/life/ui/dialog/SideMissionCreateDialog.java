@@ -7,12 +7,13 @@ import android.support.annotation.NonNull;
 import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.Task;
 import com.r3dtech.life.logic.quests.missions.Mission;
+import com.r3dtech.life.logic.quests.missions.SideMission;
 import com.r3dtech.life.logic.quests.missions.implementation.GameSideMission;
 
-public class SideMissionCreateDialog extends CreateMissionDialog{
+public class SideMissionCreateDialog extends CreateMissionDialog<SideMission>{
 
-    public SideMissionCreateDialog(@NonNull Context context, CreateMissionCallback callback) {
-        super(context, callback);
+    public SideMissionCreateDialog(@NonNull Context context, EditMissionCallback callback, SideMission mission) {
+        super(context, callback, mission);
     }
 
     @Override

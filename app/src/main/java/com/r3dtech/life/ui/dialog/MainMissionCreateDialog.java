@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.Task;
+import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.missions.Repeat;
 import com.r3dtech.life.logic.quests.missions.implementation.DateRepeat;
@@ -23,8 +24,9 @@ import com.r3dtech.life.ui.fragments.DatePickerFragment;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
-public class MainMissionCreateDialog extends CreateMissionDialog{
+public class MainMissionCreateDialog extends CreateMissionDialog<MainMission>{
     private Spinner endCaseSpinner;
     private CheckBox[] days = new CheckBox[7];
     private TextView startDateTextView, endDateTextView;
@@ -32,8 +34,8 @@ public class MainMissionCreateDialog extends CreateMissionDialog{
     private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private FragmentManager fragmentManager;
 
-    public MainMissionCreateDialog(@NonNull Context context, CreateMissionCallback callback, FragmentManager fragmentManager) {
-        super(context, callback);
+    public MainMissionCreateDialog(@NonNull Context context, EditMissionCallback callback, FragmentManager fragmentManager, MainMission mission) {
+        super(context, callback, mission);
         this.fragmentManager = fragmentManager;
     }
 
@@ -54,6 +56,27 @@ public class MainMissionCreateDialog extends CreateMissionDialog{
         days[6] = findViewById(R.id.saturday);
     }
 
+    private void updateViews() {
+        startDateTextView.setText(dateFormat.format(mission.getRepeat().getStartDate()));
+
+        for (int i = 0; i < days.length; i++) {
+            days[i].setChecked(mission.getRepeat().daysOccurance()[i]);
+        }
+
+        if (mission.getRepeat() instanceof DateRepeat) {
+            repTimesEditText.setVisibility(View.GONE);
+            endDateTextView.setVisibility(View.VISIBLE);
+            endDateTextView.setText(dateFormat.format(((DateRepeat) mission.getRepeat()).getEndDate()));
+            endCaseSpinner.setSelection(0);
+        }
+        else if (mission.getRepeat() instanceof TimesRepeat) {
+            repTimesEditText.setVisibility(View.VISIBLE);
+            endDateTextView.setVisibility(View.GONE);
+            repTimesEditText.setText(String.format(Locale.CANADA,"%d", ((TimesRepeat) mission.getRepeat()).getRepTimes()));
+            endCaseSpinner.setSelection(1);
+        }
+    }
+
     @Override
     void init() {
         super.init();
@@ -66,6 +89,9 @@ public class MainMissionCreateDialog extends CreateMissionDialog{
         populatEndCaseSpinner();
         setDatePickers();
         setEndCaseSpinnerListener();
+        if (mission != null) {
+            updateViews();
+        }
     }
 
     @Override

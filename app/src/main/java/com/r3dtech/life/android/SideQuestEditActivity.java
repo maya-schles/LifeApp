@@ -27,7 +27,13 @@ public class SideQuestEditActivity extends QuestEditActivity {
 
     @Override
     void newMissionDialog() {
-        SideMissionCreateDialog dialog = new SideMissionCreateDialog(this, this::addMission);
+        SideMissionCreateDialog dialog = new SideMissionCreateDialog(this, this::addMission, null);
+        dialog.show();
+    }
+
+    @Override
+    void editMissionDialog(Mission mission) {
+        SideMissionCreateDialog dialog = new SideMissionCreateDialog(this, this::addMission, (SideMission) mission);
         dialog.show();
     }
 
