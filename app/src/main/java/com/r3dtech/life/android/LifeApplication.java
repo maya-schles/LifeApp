@@ -73,4 +73,3 @@ public class LifeApplication extends Application implements LifeAppManager {
         startActivity(intent);
     }
 }
-gi
