@@ -39,12 +39,14 @@ public class LifeApplication extends Application implements LifeAppManager {
 
     public void createAvatar() {
         Intent intent = new Intent(this, AvatarCreationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     @Override
     public void newSideQuest() {
         Intent intent = new Intent(this, SideQuestEditActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -52,12 +54,14 @@ public class LifeApplication extends Application implements LifeAppManager {
     public void editSideQuest(int questID) {
         Intent intent = new Intent(this, SideQuestEditActivity.class);
         intent.putExtra(QUEST_ID_KEY, questID);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
     @Override
     public void newMainQuest() {
         Intent intent = new Intent(this, MainQuestEditActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
@@ -65,6 +69,8 @@ public class LifeApplication extends Application implements LifeAppManager {
     public void editMainQuest(int questID) {
         Intent intent = new Intent(this, MainQuestEditActivity.class);
         intent.putExtra(QUEST_ID_KEY, questID);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }
+gi

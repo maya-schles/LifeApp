@@ -29,6 +29,7 @@ public class GameImplementation implements Game{
     public GameImplementation(SerializableDataHelper gameDataHelper, LifeAppManager lifeAppManager) {
         dataHelper = gameDataHelper;
         gameGuiListener = (Avatar avatar)->{};
+        manager = lifeAppManager;
     }
 
     @Override
