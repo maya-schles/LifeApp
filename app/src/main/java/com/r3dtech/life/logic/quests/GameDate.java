@@ -1,12 +1,15 @@
 package com.r3dtech.life.logic.quests;
 
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class GameDate {
+public class GameDate implements Serializable{
+    static final long serialVersionUID = 23L;
+
     private final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA);
     private int day;
     private int month;
@@ -53,5 +56,18 @@ public class GameDate {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month-1, day);
         return dateFormat.format(calendar.getTime());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GameDate)) return false;
+
+        return getTime() == ((GameDate) o).getTime();
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) getTime();
     }
 }

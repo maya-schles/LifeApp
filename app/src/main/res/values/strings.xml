@@ -7,6 +7,7 @@
     <string name="daily_missions_tab">Today\'s Missions</string>
     <string name="main_quests_tab">Active Main Quests</string>
     <string name="side_quests_tab">Active Side Quests</string>
+    <string name="boss_fights_tab">Available Boss Fights</string>
 
     <!-- text labels -->
     <string name="missions_label">missions</string>

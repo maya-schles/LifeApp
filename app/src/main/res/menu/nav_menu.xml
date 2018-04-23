@@ -16,6 +16,9 @@
                     <item
                         android:title="@string/side_quests_tab"
                         android:id="@+id/nav_side_quests"/>
+                    <item
+                        android:title="@string/boss_fights_tab"
+                        android:id="@+id/nav_available_bosses"/>
                 </group>
             </menu>
         </item>

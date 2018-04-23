@@ -8,7 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 
 import com.r3dtech.life.logic.quests.quests.MainQuest;
 import com.r3dtech.life.ui.custom_views.MainMissionView;
-import com.r3dtech.life.ui.custom_views.PlainMissionView;
+import com.r3dtech.life.ui.custom_views.PlainBossView;
 import com.r3dtech.life.ui.custom_views.QuestView;
 
 import java.util.List;
@@ -39,7 +39,11 @@ public class MainQuestsAdapter extends BaseExpandableListAdapter{
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return questList.get(groupPosition).getMissions().get(childPosition);
+        MainQuest quest = questList.get(groupPosition);
+        if (childPosition < quest.getMissions().size()) {
+            return questList.get(groupPosition).getMissions().get(childPosition);
+        }
+        return quest.getBoss();
     }
 
     @Override
@@ -69,8 +73,8 @@ public class MainQuestsAdapter extends BaseExpandableListAdapter{
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         if (isLastChild) {
-            convertView = new PlainMissionView(context);
-            ((PlainMissionView) convertView).setMission(questList.get(groupPosition).getBoss());
+            convertView = new PlainBossView(context);
+            ((PlainBossView) convertView).setMission(questList.get(groupPosition).getBoss());
         }
         else {
             convertView = new MainMissionView(context);
