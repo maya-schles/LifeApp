@@ -7,8 +7,8 @@ import java.io.Serializable;
 public interface Repeat extends Serializable{
     boolean occursOnDay(GameDate date);
     boolean isComplete(GameDate date);
-    void addOccurance();
-    void removeOccurance();
+    void addOccurance(GameDate date);
+    void removeOccurance(GameDate date);
     boolean[] daysOccurance();
     GameDate getStartDate();
 }

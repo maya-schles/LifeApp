@@ -22,6 +22,8 @@ import com.r3dtech.life.logic.gui.GameGuiListener;
 import com.r3dtech.life.logic.quests.GameDate;
 import com.r3dtech.life.ui.custom_views.CharacterView;
 import com.r3dtech.life.ui.custom_views.QuestView;
+import com.r3dtech.life.ui.fragments.BossViewFragment;
+import com.r3dtech.life.ui.fragments.ListViewFragment;
 import com.r3dtech.life.ui.fragments.MainQuestListViewFragment;
 import com.r3dtech.life.ui.fragments.MissionsViewFragment;
 import com.r3dtech.life.ui.fragments.SideQuestListViewFragment;
@@ -107,10 +109,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         });
                 break;
             case R.id.nav_missions:
-                fragment = ExpandableListViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(GameDate.now()));
+                fragment = ListViewFragment.newInstance(MissionsViewFragment.class, game.getQuestDB().getMissionsForDate(GameDate.now()));
                 break;
             case R.id.nav_stats:
                 fragment = StatsFragment.newInstance(game.getAvatar().getStats());
+                break;
+            case R.id.nav_available_bosses:
+                fragment = ListViewFragment.newInstance(BossViewFragment.class, game.getQuestDB().getAvailableBossFights(GameDate.now()));
         }
         return fragment;
     }

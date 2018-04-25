@@ -44,7 +44,7 @@ public class GameMainMission extends GameMission implements MainMission {
     @Override
     public void setDone(GameDate date) {
         if (!isDoneForDay(date)) {
-            repeat.addOccurance();
+            repeat.addOccurance(date);
             datesDone.put(date, true);
             updateListener.onDone(this);
         }
@@ -53,7 +53,7 @@ public class GameMainMission extends GameMission implements MainMission {
     @Override
     public void undoDone(GameDate date) {
         if(isDoneForDay(date)) {
-            repeat.removeOccurance();
+            repeat.removeOccurance(date);
             datesDone.put(date, false);
             updateListener.onUndone(this);
         }

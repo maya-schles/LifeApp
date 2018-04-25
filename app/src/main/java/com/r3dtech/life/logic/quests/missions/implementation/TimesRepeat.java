@@ -28,12 +28,12 @@ public class TimesRepeat extends MissionRepeat {
     }
 
     @Override
-    public void addOccurance() {
+    public void addOccurance(GameDate date) {
         currTimes++;
     }
 
     @Override
-    public void removeOccurance() {
+    public void removeOccurance(GameDate date) {
         currTimes--;
     }
 

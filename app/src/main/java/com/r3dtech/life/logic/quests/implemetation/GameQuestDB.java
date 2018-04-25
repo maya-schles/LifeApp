@@ -1,6 +1,7 @@
 package com.r3dtech.life.logic.quests.implemetation;
 
 import com.r3dtech.life.logic.quests.GameDate;
+import com.r3dtech.life.logic.quests.missions.BossMission;
 import com.r3dtech.life.logic.quests.missions.MainMission;
 import com.r3dtech.life.logic.quests.missions.Mission;
 import com.r3dtech.life.logic.quests.missions.MissionUpdateListener;
@@ -40,6 +41,18 @@ public class GameQuestDB implements QuestDB {
                 if (mission.occursOnDay(date) && !mission.isDoneForDay(date)) {
                     res.add(mission);
                 }
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public List<BossMission> getAvailableBossFights(GameDate date) {
+        List<BossMission> res = new ArrayList<>();
+
+        for (MainQuest quest : getMainQuests()) {
+            if (quest.isBossReady(date)) {
+                res.add(quest.getBoss());
             }
         }
         return res;

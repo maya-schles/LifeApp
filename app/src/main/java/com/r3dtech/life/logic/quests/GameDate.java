@@ -37,18 +37,22 @@ public class GameDate implements Serializable{
 
     private long getTime() {
         return (year*12+month)*31+day;
+    }private Calendar getCalender() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month-1, day);
+        return calendar;
     }
+
     public boolean isBefore(GameDate otherDate) {
         return getTime() < otherDate.getTime();
     }
+
     public boolean isAfter(GameDate otherDate) {
         return getTime() > otherDate.getTime();
     }
 
     public int getDayOfWeek() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month-1, day);
-        return (calendar.get(Calendar.DAY_OF_WEEK)-1)%7;
+        return (getCalender().get(Calendar.DAY_OF_WEEK)-1)%7;
     }
 
     @Override
@@ -69,5 +73,17 @@ public class GameDate implements Serializable{
     @Override
     public int hashCode() {
         return (int) getTime();
+    }
+
+    private void set(GameDate other) {
+        day = other.day;
+        month = other.month;
+        year = other.year;
+    }
+
+    public void dec() {
+        Calendar calendar = getCalender();
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        set(fromCalendar(calendar));
     }
 }

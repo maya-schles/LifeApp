@@ -49,7 +49,7 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
         return isDone;
     }
 
-    private void onMissionDone(Mission mission) {
+    protected void onMissionDone(Mission mission) {
         if (checkIsDone() && !isDone) {
             isDone = true;
             updateListener.onComplete(this);
@@ -57,7 +57,7 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
         missionUpdateListener.onDone(mission);
     }
 
-    private void onMissionUndone(Mission mission) {
+    protected void onMissionUndone(Mission mission) {
         if (!checkIsDone() && isDone) {
             isDone = false;
             updateListener.onUnComplete(this);

@@ -6,24 +6,25 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
 import com.r3dtech.life.R;
-import com.r3dtech.life.logic.quests.missions.Mission;
-import com.r3dtech.life.ui.custom_views.DoableMissionView;
+import com.r3dtech.life.logic.quests.missions.BossMission;
+import com.r3dtech.life.ui.custom_views.DoableBossView;
 
 import java.util.List;
 
-public class DoableMissionsAdapter extends ArrayAdapter<Mission> {
-    public DoableMissionsAdapter(List<Mission> missionList, Context context) {
-        super(context, R.layout.view_mission_doable, missionList);
+public class DoableBossAdapter extends ArrayAdapter<BossMission> {
+    public DoableBossAdapter(List<BossMission> bossList, Context context) {
+        super(context, R.layout.view_mission_doable_boss, bossList);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
-            convertView = new DoableMissionView(getContext());
+            convertView = new DoableBossView(getContext());
         }
-        ((DoableMissionView) convertView).setMission(getItem(position));
+        ((DoableBossView) convertView).setMission(getItem(position));
         return convertView;
     }
 }
