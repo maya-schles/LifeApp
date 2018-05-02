@@ -12,7 +12,7 @@ import static com.r3dtech.life.logic.avatar.implementation.ItemBitmapDB.SHIRT_ID
 import static com.r3dtech.life.logic.avatar.implementation.ItemBitmapDB.SHOES_ID;
 
 public class GameAvatarRepBitmap implements AvatarRepBitmap {
-    static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private ItemBitmap[] viewLayers = new GameItemRep[VIEW_LAYERS_NUM];
 
     public GameAvatarRepBitmap() {

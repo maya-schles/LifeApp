@@ -2,9 +2,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorBase</item>
+        <item name="colorPrimaryDark">@color/colorBaseDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/game_font</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,24 +20,24 @@
     </style>
 
     <style name="Text_Stat_Style" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/stat_view_height</item>
         <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="Text_Title_Style" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textColor">@color/title</item>
         <item name="android:textSize">30sp</item>
     </style>
 
     <style name="Text_Quest_Title_Style" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorQuest</item>
         <item name="android:textSize">20sp</item>
     </style>
 
     <style name="Text_Mission_Title_Style" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorMission</item>
         <item name="android:textSize">20sp</item>
     </style>
 
@@ -50,5 +51,9 @@
     </style>
 
     <style name="Text_Label_Style" parent="@android:style/TextAppearance">
+    </style>
+
+    <style name="Text_category">
+        <item name="android:textColor">@color/colorAccentDark</item>
     </style>
 </resources>

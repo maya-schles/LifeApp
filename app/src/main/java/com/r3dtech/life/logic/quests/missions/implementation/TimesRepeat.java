@@ -4,7 +4,7 @@ package com.r3dtech.life.logic.quests.missions.implementation;
 import com.r3dtech.life.logic.quests.GameDate;
 
 public class TimesRepeat extends MissionRepeat {
-    static final long serialVersionUID = 19L;
+    private static final long serialVersionUID = 1L;
     private static final int DEFAULT_REP_TIMES = 66;
     private int repeatTimes, currTimes;
 

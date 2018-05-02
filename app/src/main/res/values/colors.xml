@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#8c106d</color>
-    <color name="colorPrimary">#b43895</color>
-    <color name="colorPrimaryLight">#ff85e2</color>
-    <color name="colorPrimaryExtraLight">#ffd1ff</color>
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorAccent">#95b438</color>
-    <color name="colorThird">#3895b4</color>
+    <color name="colorBackground">#ffffff</color>
+    <color name="colorBaseDark">#6f2232</color>
+    <color name="colorBase">#950740</color>
+    <color name="colorBaseLight">#c3073f</color>
+    <color name="colorAccentDark">#1a1a1d</color>
+    <color name="colorAccent">#4e4e50</color>
+    <color name="colorAccentLight1">#bab2b5</color>
+    <color name="colorAccentLight2">#e3e2df</color>
+
+    <color name="title">@color/colorAccentDark</color>
+    <color name="colorQuest">@color/colorAccent</color>
+    <color name="colorMission">@color/colorAccentLight1</color>
     <color name="colorMoney">#ddaa00</color>
 </resources>

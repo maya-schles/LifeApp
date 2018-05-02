@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
 
+@SuppressWarnings("InstanceVariableMayNotBeInitializedByReadObject")
 public abstract class GameQuest<T extends Mission> extends GameTask implements Quest<T> {
-    static final long serialVersionUID = 21L;
+    private static final long serialVersionUID = 1L;
 
     private transient int id = -1;
     private List<T> missionList;
@@ -49,7 +50,7 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
         return isDone;
     }
 
-    protected void onMissionDone(Mission mission) {
+    void onMissionDone(Mission mission) {
         if (checkIsDone() && !isDone) {
             isDone = true;
             updateListener.onComplete(this);
@@ -57,7 +58,7 @@ public abstract class GameQuest<T extends Mission> extends GameTask implements Q
         missionUpdateListener.onDone(mission);
     }
 
-    protected void onMissionUndone(Mission mission) {
+    void onMissionUndone(Mission mission) {
         if (!checkIsDone() && isDone) {
             isDone = false;
             updateListener.onUnComplete(this);

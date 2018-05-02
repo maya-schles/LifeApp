@@ -5,7 +5,8 @@ import java.io.Serializable;
 
 public interface ItemBitmap extends Serializable {
     int SIZE = 16;
-    class Color {
+    class Color implements Serializable{
+        private static final long serialVersionUID = 1L;
         public static final Color TRANSPARENT = null;
         public static final Color BLACK = new Color(0x00, 0x00, 0x00);
         public static final Color RED = new Color(0xff, 0x00, 0x00);

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameQuestDB implements QuestDB {
-    static final long serialVersionUID = 11L;
+    private static final long serialVersionUID = 1L;
     private static int maxID = 0;
 
     private List<Quest> quests = new ArrayList<>();

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+
+import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.quests.SideQuest;
 import com.r3dtech.life.ui.custom_views.DoableMissionView;
 import com.r3dtech.life.ui.custom_views.QuestView;
@@ -13,6 +15,7 @@ import java.util.List;
 public class SideQuestsAdapter extends BaseExpandableListAdapter{
     private List<SideQuest> questList;
     private Context context;
+    private static final int childPaddingLeft = 64;
 
     public SideQuestsAdapter(List<SideQuest> questList, Context context) {
         this.questList = questList;
@@ -69,6 +72,7 @@ public class SideQuestsAdapter extends BaseExpandableListAdapter{
             convertView = new DoableMissionView(context);
         }
         ((DoableMissionView) convertView).setMission(questList.get(groupPosition).getMissions().get(childPosition));
+        convertView.setPadding(childPaddingLeft, 0, 0, 0);
         return convertView;
     }
 

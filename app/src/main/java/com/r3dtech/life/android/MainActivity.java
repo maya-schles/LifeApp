@@ -6,9 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
@@ -46,12 +50,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         game = manager.getGame();
         manager.setGameGUI(this);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        ((FloatingActionMenu) findViewById(R.id.create_quest_menu)).setClosedOnTouchOutside(true);
+        FloatingActionMenu fam = findViewById(R.id.create_quest_menu);
+        fam.setClosedOnTouchOutside(true);
 
         findViewById(R.id.character_view).invalidate();
+        update_nav_view();
+
+        /*NestedScrollView scrollView = findViewById(R.id.flcontent);
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > oldScrollY && fam.getVisibility() == View.VISIBLE) {
+                    fam.setVisibility(View.GONE);
+                }
+                if (scrollY < oldScrollY && fam.getVisibility() == View.GONE) {
+                    fam.setVisibility(View.VISIBLE);
+                }
+            }
+        });*/
+    }
+
+    private void update_nav_view() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        Menu myMenu = navigationView.getMenu();
+        MenuItem quests= myMenu.findItem(R.id.quests);
+        SpannableString s = new SpannableString(quests.getTitle());
+        s.setSpan(new TextAppearanceSpan(this, R.style.Text_category), 0, s.length(), 0);
+        quests.setTitle(s);
     }
 
     @Override

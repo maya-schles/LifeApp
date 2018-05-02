@@ -18,7 +18,7 @@
             android:layout_weight="0"
             android:adjustViewBounds="true"
             android:paddingEnd="@dimen/small_horizontal_margin"
-            android:tint="@android:color/white"/>
+            android:tint="@color/colorAccent"/>
         <com.r3dtech.life.ui.custom_views.BarView
             android:id="@+id/bar"
             android:layout_width="0dp"

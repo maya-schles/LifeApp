@@ -23,7 +23,7 @@ public class GameImplementation implements Game{
     private QuestDB questDB;
     private Avatar avatar;
     private SerializableDataHelper dataHelper;
-    private transient GameGuiListener gameGuiListener;
+    private GameGuiListener gameGuiListener;
     private LifeAppManager manager;
 
     public GameImplementation(SerializableDataHelper gameDataHelper, LifeAppManager lifeAppManager) {

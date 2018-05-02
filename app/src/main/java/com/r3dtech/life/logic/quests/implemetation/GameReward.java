@@ -6,7 +6,7 @@ import com.r3dtech.life.logic.quests.Reward;
 import com.r3dtech.life.logic.quests.Task;
 
 public class GameReward implements Reward {
-    static final long serialVersionUID = 12L;
+    private static final long serialVersionUID = 1L;
     private int TRIVIAL_XP_REWARD = 3, TRIVIAL_MONEY_REWARD = 1;
     private int EASY_XP_REWARD = 8, EASY_MONEY_REWARD = 3;
     private int MEDIUM_XP_REWARD = 25, MEDIUM_MONEY_REWARD = 8;

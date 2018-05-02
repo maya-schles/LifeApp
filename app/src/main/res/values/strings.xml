@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">life</string>
+    <string name="app_name">Questery</string>
 
     <!-- nav menu strings -->
     <string name="stats_tab">Stats</string>

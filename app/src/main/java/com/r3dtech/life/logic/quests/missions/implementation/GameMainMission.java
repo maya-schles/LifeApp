@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class GameMainMission extends GameMission implements MainMission {
-    static final long serialVersionUID = 15L;
+    private static final long serialVersionUID = 1L;
     private Repeat repeat;
     private Map<GameDate, Boolean> datesDone = new HashMap<>();
 

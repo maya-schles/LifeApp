@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBase"
     android:orientation="horizontal">
     <com.r3dtech.life.ui.custom_views.AvatarDisplayView
         android:id="@+id/avatar_view"
@@ -46,7 +46,7 @@
                 android:id="@+id/level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:statColor="@color/colorAccent"
+                app:statColor="@android:color/holo_green_dark"
                 app:statIcon="@drawable/ic_xp"
                 app:statName="LVL" />
 

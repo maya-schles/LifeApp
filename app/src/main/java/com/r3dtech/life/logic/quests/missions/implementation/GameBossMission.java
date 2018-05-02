@@ -7,7 +7,7 @@ import com.r3dtech.life.logic.quests.missions.BossMission;
 
 
 public class GameBossMission extends GameMission implements BossMission {
-    static final long serialVersionUID = 23L;
+    private static final long serialVersionUID = 1L;
     private boolean isComplete;
 
     public GameBossMission(String title, String description, Difficulty difficulty) {

@@ -4,7 +4,7 @@ import com.r3dtech.life.logic.avatar.ItemBitmap;
 
 
 public class GameItemRep implements ItemBitmap {
-    static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 1L;
     private String id;
     private int ver;
 

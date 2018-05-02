@@ -3,8 +3,7 @@
     android:id="@+id/foreground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBackground"
-    android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft">
+    android:background="@color/colorBackground">
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"

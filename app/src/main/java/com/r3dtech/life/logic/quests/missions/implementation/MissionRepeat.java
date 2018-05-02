@@ -5,7 +5,7 @@ import com.r3dtech.life.logic.quests.missions.Repeat;
 
 
 abstract class MissionRepeat implements Repeat{
-    static final long serialVersionUID = 18L;
+    private static final long serialVersionUID = 1L;
     private boolean[] daysOfWeek;
     private GameDate startDate;
 

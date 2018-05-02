@@ -4,11 +4,14 @@ import java.io.Serializable;
 
 public interface Stats extends Serializable{
     class Stat implements Serializable{
+        private static final long serialVersionUID = 1L;
         public String statName;
+        public String statAbbr;
         public double value;
 
-        public Stat(String name, double value) {
-            this.statName = statName;
+        public Stat(String name, String abbr, double value) {
+            statName = name;
+            statAbbr = abbr;
             this.value = value;
         }
     }

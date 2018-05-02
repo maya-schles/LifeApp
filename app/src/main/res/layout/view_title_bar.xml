@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorBase"
     android:orientation="horizontal"
     android:gravity="center_vertical">
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:src="@drawable/ic_menu"
-        android:tint="@color/colorBackground"
+        android:tint="@android:color/white"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:background="@android:color/transparent"
         android:onClick="openNavDrawer"/>
@@ -22,5 +22,5 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:text="@string/app_name"
-        android:textColor="@color/colorBackground"/>
+        android:textColor="@android:color/white"/>
 </LinearLayout>

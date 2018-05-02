@@ -21,6 +21,7 @@ public class ItemBitmapDB {
     static final String HAIR_ID = "hair";
 
     public static class DataItemBitmap implements ItemBitmap {
+        private static final long serialVersionUID = 1L;
         private int[][] bitmap = new int[SIZE][SIZE];
         private List<Color> colors = new ArrayList<>();
 

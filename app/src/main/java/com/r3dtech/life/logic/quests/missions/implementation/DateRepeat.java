@@ -6,7 +6,7 @@ import com.r3dtech.life.logic.quests.GameDate;
 import java.util.HashMap;
 
 public class DateRepeat extends MissionRepeat {
-    static final long serialVersionUID = 14L;
+    private static final long serialVersionUID = 1L;
     private GameDate endDate;
     private HashMap<GameDate, Boolean> occurances = new HashMap<>();
 

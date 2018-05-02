@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
+import com.r3dtech.life.R;
 import com.r3dtech.life.logic.quests.quests.MainQuest;
 import com.r3dtech.life.ui.custom_views.MainMissionView;
 import com.r3dtech.life.ui.custom_views.PlainBossView;
@@ -16,6 +17,7 @@ import java.util.List;
 public class MainQuestsAdapter extends BaseExpandableListAdapter{
     private List<MainQuest> questList;
     private Context context;
+    private static final int childPaddingLeft = 64;
 
     public MainQuestsAdapter(List<MainQuest> questList, Context context) {
         this.questList = questList;
@@ -80,6 +82,7 @@ public class MainQuestsAdapter extends BaseExpandableListAdapter{
             convertView = new MainMissionView(context);
             ((MainMissionView) convertView).setMission(questList.get(groupPosition).getMissions().get(childPosition));
         }
+        convertView.setPadding(childPaddingLeft, 0, 0, 0);
         return convertView;
     }
 

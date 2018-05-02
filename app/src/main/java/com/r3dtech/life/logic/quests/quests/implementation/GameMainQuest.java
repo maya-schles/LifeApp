@@ -12,7 +12,7 @@ import java.io.ObjectInputStream;
 import java.util.List;
 
 public class GameMainQuest extends GameQuest<MainMission> implements MainQuest {
-    static final long serialVersionUID = 20L;
+    private static final long serialVersionUID = 1L;
     private BossMission bossMission;
 
     public GameMainQuest(String title, String description, Difficulty difficulty, List<MainMission> missionList, BossMission bossMission) {

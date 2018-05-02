@@ -7,7 +7,7 @@ import com.r3dtech.life.logic.quests.quests.SideQuest;
 import java.util.List;
 
 public class GameSideQuest extends GameQuest<SideMission> implements SideQuest {
-    static final long serialVersionUID = 22L;
+    private static final long serialVersionUID = 1L;
 
     public GameSideQuest(String title, String description, Difficulty difficulty, List<SideMission> missionList) {
         super(title, description, difficulty, missionList);

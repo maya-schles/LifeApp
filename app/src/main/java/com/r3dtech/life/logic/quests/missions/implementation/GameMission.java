@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 abstract class GameMission extends GameTask implements Mission {
-    static final long serialVersionUID = 16L;
+    private static final long serialVersionUID = 1L;
     transient MissionUpdateListener updateListener;
 
     GameMission(String title, String description, Difficulty difficulty) {

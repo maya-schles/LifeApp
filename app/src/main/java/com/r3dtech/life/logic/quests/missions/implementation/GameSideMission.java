@@ -8,7 +8,7 @@ import com.r3dtech.life.logic.quests.missions.SideMission;
 
 
 public class GameSideMission extends GameMission implements SideMission {
-    static final long serialVersionUID = 17L;
+    private static final long serialVersionUID = 1L;
     private boolean isComplete = false;
 
     public GameSideMission(String title, String description, Difficulty difficulty) {

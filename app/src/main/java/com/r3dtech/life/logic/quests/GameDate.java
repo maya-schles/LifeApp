@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class GameDate implements Serializable{
-    static final long serialVersionUID = 23L;
+    private static final long serialVersionUID = 1L;
 
     private final static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.CANADA);
     private int day;
